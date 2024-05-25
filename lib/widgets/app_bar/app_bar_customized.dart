@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/widgets/app_bar/app_title.dart';
+import 'package:mobile/widgets/app_bar/menu_button.dart';
 
 const double appBarHeight = 85.0;
-const String appTitle = 'Cooking companion';
 
 class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
   const AppBarCustomized({super.key});
@@ -27,25 +28,4 @@ class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(appBarHeight);
-}
-
-class MenuButton extends StatelessWidget {
-  const MenuButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.menu_outlined),
-      onPressed: () {},
-    );
-  }
-}
-
-class AppTitle extends StatelessWidget {
-  const AppTitle({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text(appTitle);
-  }
 }

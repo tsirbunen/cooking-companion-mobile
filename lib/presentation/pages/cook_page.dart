@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/widgets/page_base.dart';
+import 'package:mobile/widgets/page_base/page_base.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class CookPage extends StatelessWidget {
+  static const String path = '/cook';
+
+  const CookPage({super.key});
 
   @override
   Widget build(BuildContext context) {
