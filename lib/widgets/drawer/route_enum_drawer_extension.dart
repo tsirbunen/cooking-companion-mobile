@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/pages/cook_page.dart';
-import 'package:mobile/presentation/pages/home_page.dart';
-import 'package:mobile/presentation/pages/search_page.dart';
-import 'package:mobile/presentation/pages/settings_page.dart';
-
-enum RouteEnum {
-  home,
-  search,
-  cook,
-  settings,
-}
+import 'package:mobile/router/router.dart';
 
 extension DrawerExtension on RouteEnum {
   IconData get iconData => {
@@ -24,12 +14,5 @@ extension DrawerExtension on RouteEnum {
         RouteEnum.search: 'Search',
         RouteEnum.cook: 'Cook',
         RouteEnum.settings: 'Settings',
-      }[this]!;
-
-  String get path => {
-        RouteEnum.home: HomePage.path,
-        RouteEnum.search: SearchPage.path,
-        RouteEnum.cook: CookPage.path,
-        RouteEnum.settings: SettingsPage.path,
       }[this]!;
 }

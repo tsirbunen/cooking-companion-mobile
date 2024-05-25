@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 const double dividerWidth = 2.0;
 
@@ -20,7 +21,7 @@ class DrawerRoute extends StatelessWidget {
       children: [
         const Divider(),
         GestureDetector(
-          onTap: () => _navigateToRoute(),
+          onTap: () => _navigateToPath(context),
           child: Row(
             children: [
               RouteIcon(iconData: iconData),
@@ -32,8 +33,9 @@ class DrawerRoute extends StatelessWidget {
     );
   }
 
-  void _navigateToRoute() {
-    debugPrint('Navigate to $path');
+  void _navigateToPath(BuildContext context) {
+    debugPrint('Navigate to route path $path');
+    context.go(path);
   }
 }
 
