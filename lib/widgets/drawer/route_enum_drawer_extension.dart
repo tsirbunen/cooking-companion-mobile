@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/router/router.dart';
+import 'package:mobile/core/router/router.dart';
 
 extension DrawerExtension on RouteEnum {
   IconData get iconData => {

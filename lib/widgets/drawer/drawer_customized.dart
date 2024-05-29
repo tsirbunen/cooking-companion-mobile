@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/router/router.dart';
+import 'package:mobile/core/router/router.dart';
 import 'package:mobile/widgets/drawer/drawer_route.dart';
 import 'package:mobile/widgets/drawer/drawer_title.dart';
 import 'package:mobile/widgets/drawer/route_enum_drawer_extension.dart';

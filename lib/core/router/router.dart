@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:mobile/router/routes.dart';
+import 'package:mobile/core/router/routes.dart';
 
 // Note: The routes available in the app are defined with this enum:
 // Where ever needed, the enum is extended to support new functionality
