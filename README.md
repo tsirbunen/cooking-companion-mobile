@@ -17,4 +17,41 @@ To build the generated parts of immutable Freezed model classes and the go route
 
 - **IMMUTABLE MODELS:** For the immutable domain entity models the **[freezed](https://pub.dev/packages/freezed)** package was chosen. Freezed classes are annotated with **[freezed_annotation](https://pub.dev/packages/freezed_annotation)** and generated files built with the **[build_runner](https://pub.dev/packages/build_runner)** to produce \*.freezed.dart-files in the same folder as the original annotated class file. When a fromJson factory constructor is defined in a class with the @freezed-annotation, then code for (de)serialization of the freezed model class is generated (\*.g.dart). For this, also the **[json_serializable](https://pub.dev/packages/json_serializable)** with **[json_annotation](https://pub.dev/packages/json_annotation)** is needed.
 - **ROUTING:** **[go_router](https://pub.dev/packages/go_router)** with **[type-safe routes](https://pub.dev/documentation/go_router/latest/topics/Type-safe%20routes-topic.html)** and **[go_router_builder file generation](https://pub.dev/packages/go_router_builder)** were used.
-- **GRAPHQL CLIENT:** For the GraphQL client, the more recent **[Ferry](https://ferrygraphql.com)** was first considered, but it seemed quite "code-generation-heavy" and is based on StreamBuilder and Built value which were not desired. So the "traditional" **[graphql](https://pub.dev/packages/graphql)** was chosen.
+- **GRAPHQL CLIENT:** For the GraphQL client, the more recent **[Ferry](https://ferrygraphql.com)** was first considered, but it seemed quite "code-generation-heavy" and is based on StreamBuilder and Built value which were not desired. So the "traditional" **[graphql](https://pub.dev/packages/graphql)** was chosen. The GraphQL client connects to the **/api/graphql** of **[the Cookbook companion Next.js web app](https://github.com/tsirbunen/cookbook/)**.
+- **STATE MANAGEMENT:** The **[riverpod](https://riverpod.dev/docs/introduction/why_riverpod)** package was chosen for state management mainly out of curiosity.
+
+### Directory structure
+
+The overall structure of the project files is presented in the diagram below:
+
+```
+lib/
+  ├── core/
+        ├── api_service/
+        ├── app/
+        └── router/
+  ├── features/
+          ├── users/
+          └── recipes/
+  ├── utils/
+          ├── either/
+          ├── graph_ql/
+          └── failure/
+  ├── test/
+  ├── widgets/
+  └── main.dart
+```
+
+The directory structure of an example feature is presented below:
+
+```
+some_feature/
+      ├── application/
+      ├── domain/
+            ├── models/
+            └── use_cases
+      ├── presentation/
+      └── repository/
+            ├── api_query_handling/
+            └── graph_ql
+```

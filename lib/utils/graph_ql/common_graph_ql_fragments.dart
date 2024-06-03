@@ -53,22 +53,3 @@ const recipeFragment = '''
     $instructionGroupFragment
   }
 ''';
-
-const getAllDataQuery = '''
-query {
-
-    allRecipes {
-      $recipeFragment
-    }
-    
-    allLanguages {
-      id
-      language
-    }
-
-    allTags {
-      id
-      tag
-    }
-}
-''';

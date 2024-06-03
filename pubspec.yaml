@@ -42,6 +42,7 @@ dependencies:
   graphql: 5.2.0-beta.8
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5
+  fpdart: 2.0.0-dev.3
 
 dev_dependencies:
   flutter_test:
