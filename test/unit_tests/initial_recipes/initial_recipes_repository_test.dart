@@ -40,7 +40,6 @@ void main() {
           (tester) async {
         final query = InitialRecipesQuery();
         final apiClient = getTestApiClient(query, queryResponseData);
-
         final ProviderContainer container = createTestProviderContainer(
           overrides: [apiClientProvider.overrideWithValue(apiClient)],
         );
@@ -54,8 +53,7 @@ void main() {
           fireImmediately: true,
         );
 
-        final outcome = await container.read(initialRecipesProvider.future);
-        final recipes = outcome.value;
+        final recipes = await container.read(initialRecipesProvider.future);
 
         expect(recipes!.length, queryResponseData[query.name]!.length);
         for (final recipe in recipes) {

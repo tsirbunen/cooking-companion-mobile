@@ -1,3 +1,4 @@
+import 'package:graphql/client.dart';
 import 'package:mobile/core/api_service/api_client.dart';
 import 'package:mobile/utils/graph_ql/graph_ql_query.dart';
 import 'graphql_client_mock.dart';
@@ -13,3 +14,9 @@ ApiClient getTestApiClient(
 
   return apiClient;
 }
+
+final exception = OperationException(
+  linkException: ServerException(
+    originalException: ArgumentError(['No host specified in URI']),
+  ),
+);

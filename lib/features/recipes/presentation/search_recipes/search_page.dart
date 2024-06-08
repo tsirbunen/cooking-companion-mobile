@@ -12,7 +12,7 @@ class SearchPage extends ConsumerWidget {
     final valueAsync = ref.watch(initialRecipesProvider);
     final initialRecipes = valueAsync.when(
       data: (data) {
-        print('initialRecipes: ${data.value?.length}');
+        // print('initialRecipes: ${data.value?.length}');
 
         return data;
       },

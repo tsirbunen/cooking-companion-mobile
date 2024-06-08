@@ -11,7 +11,6 @@ class InitialRecipesUseCase implements InitialRecipesUseCaseInterface {
 
   @override
   Future<Either<Failure, List<Recipe>>> getInitialRecipes() async {
-    final response = await _repository.getInitialRecipes();
-    return response;
+    return await _repository.getInitialRecipes();
   }
 }

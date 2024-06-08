@@ -5,6 +5,8 @@ import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/domain/use_cases/repository_interface.dart';
 import 'package:mobile/features/recipes/repository/graph_ql.dart';
 
+const noDataMessage = 'Failed to get any recipe data!';
+
 /// InitialRecipesRepository provides the initial recipes data to the domain layer.
 /// It implements the interface defined in the domain layer, but is responsible for
 /// deciding where and how to get the data.
@@ -19,7 +21,10 @@ class InitialRecipesRepository implements InitialRecipesRepositoryInterface {
 
     return response.match<Either<Failure, List<Recipe>>>(
       (data) {
-        final List<Recipe> recipes = (data![query.name])
+        if (data == null) return Either.failure(const Failure(noDataMessage));
+        if (data.isEmpty) return Either.value([]);
+
+        final List<Recipe> recipes = (data[query.name])
             .map<Recipe>((recipe) => Recipe.fromJson(recipe))
             .toList();
 

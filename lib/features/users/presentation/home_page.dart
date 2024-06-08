@@ -1,19 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:mobile/widgets/page_base/page_base.dart';
-
-// class HomePage extends StatelessWidget {
-//   const HomePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const PageBase(
-//       pageBody: Center(
-//         child: Text('HOME'),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/recipes/application/initial_recipes_provider.dart';
@@ -25,22 +9,15 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // FIXME: Remove these temporary testing lines
     final valueAsync = ref.watch(initialRecipesProvider);
-    final initialRecipes = valueAsync.when(
-      data: (data) {
-        print('initialRecipes: ${data.value?.length}');
-
-        return data;
-      },
-      loading: () {
-        print('LOADING HOME');
-
-        return null;
-      },
-      error: (error, stackTrace) => null,
+    valueAsync.when(
+      data: (data) => print('DATA $data'),
+      loading: () => print('LOADING HOME'),
+      error: (error, stackTrace) => print('error $error'),
     );
 
-    return PageBase(
+    return const PageBase(
       pageBody: Center(
         child: Column(
           children: [
