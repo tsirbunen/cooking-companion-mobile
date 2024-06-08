@@ -10,6 +10,7 @@ part 'recipe.g.dart';
 
 @freezed
 class Recipe with _$Recipe {
+  @JsonSerializable(explicitToJson: true)
   const factory Recipe({
     required int id,
     required String title,

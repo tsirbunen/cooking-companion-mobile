@@ -30,10 +30,8 @@ class InitialRecipesNotifier
     final Either<Failure, List<Recipe>> result =
         await useCase.getInitialRecipes();
 
-    return result.match(
-      (recipes) {
-        return AsyncValue.data(recipes);
-      },
+    return result.match<AsyncValue<List<Recipe>>>(
+      (recipes) => AsyncValue.data(recipes!),
       (failure) {
         return AsyncValue.error(failure.message, StackTrace.current);
       },

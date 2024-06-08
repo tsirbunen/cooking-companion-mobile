@@ -9,6 +9,22 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final valueAsync = ref.watch(initialRecipesProvider);
+    final initialRecipes = valueAsync.when(
+      data: (data) {
+        print('initialRecipes: ${data.value?.length}');
+
+        return data;
+      },
+      loading: () {
+        print('LOADING SEARCH');
+
+        return null;
+      },
+      error: (error, stackTrace) => null,
+    );
+    // print('initialRecipes: $initialRecipes');
+
     return PageBase(
       pageBody: Center(
         child: Column(

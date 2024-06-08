@@ -21,5 +21,5 @@ Map<String, dynamic> _$$InstructionGroupImplToJson(
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'instructions': instance.instructions,
+      'instructions': instance.instructions.map((e) => e.toJson()).toList(),
     };

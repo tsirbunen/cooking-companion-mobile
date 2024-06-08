@@ -213,7 +213,8 @@ class __$$RecipeImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$RecipeImpl implements _Recipe {
   const _$RecipeImpl(
       {required this.id,

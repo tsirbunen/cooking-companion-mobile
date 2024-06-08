@@ -1,11 +1,16 @@
-import 'package:mobile/utils/graph_ql/graphql_queries.dart';
+import 'package:mobile/utils/graph_ql/fragments.dart';
+import 'package:mobile/utils/graph_ql/graph_ql_query.dart';
 
-const queryName = 'allRecipes';
+class InitialRecipesQuery extends GraphQLQuery {
+  @override
+  String get name => 'allRecipes';
 
-const getInitialRecipesQuery = '''
-query {
-    $queryName {
-      $recipeFragment
+  @override
+  String get query => '''
+    query {
+        $name {
+          $recipeFragment
+        }
     }
+    ''';
 }
-''';

@@ -30,11 +30,13 @@ Map<String, dynamic> _$$RecipeImplToJson(_$RecipeImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'language': instance.language,
+      'language': instance.language.toJson(),
       'ovenNeeded': instance.ovenNeeded,
       'description': instance.description,
-      'photos': instance.photos,
-      'tags': instance.tags,
-      'ingredientGroups': instance.ingredientGroups,
-      'instructionGroups': instance.instructionGroups,
+      'photos': instance.photos?.map((e) => e.toJson()).toList(),
+      'tags': instance.tags?.map((e) => e.toJson()).toList(),
+      'ingredientGroups':
+          instance.ingredientGroups.map((e) => e.toJson()).toList(),
+      'instructionGroups':
+          instance.instructionGroups.map((e) => e.toJson()).toList(),
     };

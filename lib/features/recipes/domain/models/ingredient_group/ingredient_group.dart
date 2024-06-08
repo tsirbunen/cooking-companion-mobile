@@ -6,6 +6,7 @@ part 'ingredient_group.g.dart';
 
 @freezed
 class IngredientGroup with _$IngredientGroup {
+  @JsonSerializable(explicitToJson: true)
   const factory IngredientGroup({
     required int id,
     String? title,

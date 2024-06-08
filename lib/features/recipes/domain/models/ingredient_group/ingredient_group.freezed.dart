@@ -117,7 +117,8 @@ class __$$IngredientGroupImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$IngredientGroupImpl implements _IngredientGroup {
   const _$IngredientGroupImpl(
       {required this.id,

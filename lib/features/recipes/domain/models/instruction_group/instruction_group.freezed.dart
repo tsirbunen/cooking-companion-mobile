@@ -117,7 +117,8 @@ class __$$InstructionGroupImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$InstructionGroupImpl implements _InstructionGroup {
   const _$InstructionGroupImpl(
       {required this.id,
