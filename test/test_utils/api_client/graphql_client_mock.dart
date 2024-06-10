@@ -8,9 +8,9 @@ import 'package:graphql/client.dart';
 @GenerateNiceMocks([MockSpec<GraphQLClient>()])
 import 'graphql_client_mock.mocks.dart';
 
-/// The getGraphQLClientMock function takes as its arguments the query
-/// that will be performed in the test and the response that it should return.
-GraphQLClient getGraphQLClientMock(
+/// This function takes as its arguments the query that the GraphQL client
+/// will perform in the test and the response data that should be returned.
+GraphQLClient getGraphQLClientQueryMock(
   Map<String, dynamic> testDataToReturn,
   GraphQLQuery query,
 ) {
@@ -31,3 +31,30 @@ GraphQLClient getGraphQLClientMock(
 
   return graphQLClient;
 }
+
+/// This function takes as its argument the error that the GraphQL client
+/// return when the query is performed.
+GraphQLClient getGraphQLClientErrorMock(GraphQLQuery query) {
+  final GraphQLClient graphQLClient = MockGraphQLClient();
+
+  final query = InitialRecipesQuery();
+  final QueryOptions options = QueryOptions(document: gql(query.query));
+
+  when(graphQLClient.query(options)).thenAnswer(
+    (_) async => Future.value(
+      QueryResult(
+        exception: serverException,
+        options: options,
+        source: QueryResultSource.network,
+      ),
+    ),
+  );
+
+  return graphQLClient;
+}
+
+final serverException = OperationException(
+  linkException: ServerException(
+    originalException: ArgumentError('Some exception'),
+  ),
+);

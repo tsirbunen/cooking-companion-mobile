@@ -18,7 +18,10 @@ void main() {
       testWidgets('fetches recipes and converts them to model objects',
           (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(query, queryResponseData);
+        final apiClient = getTestApiClient(
+          query: query,
+          responseData: queryResponseData,
+        );
         final container = createTestProviderContainer(
           overrides: [apiClientProvider.overrideWithValue(apiClient)],
         );
@@ -32,6 +35,18 @@ void main() {
           expect(recipe, isA<Recipe>());
         }
       });
+
+      testWidgets('on api client exception returns a failure', (tester) async {
+        final query = InitialRecipesQuery();
+        final apiClient = getTestApiClient(query: query, isException: true);
+        final container = createTestProviderContainer(
+          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+        );
+
+        final response =
+            await container.read(repositoryProvider).getInitialRecipes();
+        expect(response.isFailure, true);
+      });
     });
 
     group('NOTIFIER -', () {
@@ -39,7 +54,10 @@ void main() {
           'holds recipes as model objects in its state (aka "future") once built',
           (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(query, queryResponseData);
+        final apiClient = getTestApiClient(
+          query: query,
+          responseData: queryResponseData,
+        );
         final ProviderContainer container = createTestProviderContainer(
           overrides: [apiClientProvider.overrideWithValue(apiClient)],
         );
@@ -59,6 +77,28 @@ void main() {
         for (final recipe in recipes) {
           expect(recipe, isA<Recipe>());
         }
+      });
+
+      testWidgets('on api exception throws exception', (tester) async {
+        final query = InitialRecipesQuery();
+        final apiClient = getTestApiClient(
+          query: query,
+          isException: true,
+        );
+        final ProviderContainer container = createTestProviderContainer(
+          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+        );
+
+        // Note: We need to add a listener to keep the notifier provider alive
+        // throughout the test.
+        final listener = TestListener();
+        container.listen(
+          initialRecipesProvider.notifier,
+          listener.call,
+          fireImmediately: true,
+        );
+        expect(() async => await container.read(initialRecipesProvider.future),
+            throwsException);
       });
     });
   });

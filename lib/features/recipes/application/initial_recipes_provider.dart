@@ -31,6 +31,9 @@ class InitialRecipesNotifier extends AutoDisposeAsyncNotifier<List<Recipe>?> {
     final useCase = InitialRecipesUseCase(repository);
     final Either<Failure, List<Recipe>> result =
         await useCase.getInitialRecipes();
+
+    // Note: When we throw an exception here, the async provider will "provide"
+    // an async error to any ui widget that is listening to its state.
     return result.match(
       (recipes) => recipes,
       (failure) => throw Exception(result.failure!.message),

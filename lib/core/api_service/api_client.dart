@@ -8,12 +8,13 @@ const apiErrorLabel = 'Api error:';
 const defaultException = 'Oops! Some error occurred...';
 
 class ApiClient {
-  final HttpLink _httpLink = HttpLink(apiUrl);
+  late HttpLink _httpLink;
   late GraphQLClient _graphQLClient;
 
   // Note: The optional client parameter is allowed here so that a mock client
   // can be injected during testing.
   ApiClient initialize({GraphQLClient? client}) {
+    _httpLink = HttpLink(apiUrl);
     _graphQLClient =
         client ?? GraphQLClient(link: _httpLink, cache: GraphQLCache());
     return this;
