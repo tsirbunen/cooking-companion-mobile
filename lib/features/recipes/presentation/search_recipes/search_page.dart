@@ -17,7 +17,7 @@ class SearchPage extends ConsumerWidget {
         return data;
       },
       loading: () {
-        print('LOADING SEARCH');
+        // print('LOADING SEARCH');
 
         return null;
       },

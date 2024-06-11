@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
+import 'package:mobile/core/logger/logger.dart';
 import 'package:mobile/core/router/routes.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
 // Note: The routes available in the app are defined with this enum:
 // Where ever needed, the enum is extended to support new functionality
@@ -11,56 +13,59 @@ enum RouteEnum {
   settings,
 }
 
+// Note: Let's use switch-case to return the path for each route,
+// so that if we miss a route, the code editor gives us a warning.
 extension PathExtension on RouteEnum {
-  String get path => {
-        RouteEnum.home: HomeRoute.path,
-        RouteEnum.search: SearchRoute.path,
-        RouteEnum.cook: CookRoute.path,
-        RouteEnum.settings: SettingsRoute.path,
-      }[this]!;
+  String path() {
+    switch (this) {
+      case RouteEnum.home:
+        return HomeRoute.path;
+      case RouteEnum.search:
+        return SearchRoute.path;
+      case RouteEnum.cook:
+        return CookRoute.path;
+      case RouteEnum.settings:
+        return SettingsRoute.path;
+      default:
+        throw Exception('Route path not implemented!');
+    }
+  }
 }
 
-// FIXME: How to verify that we get error if path is not implemented
-// for all the routes in the enum? Here and elsewhere. This switch does not
-// seem to complain if a case is missing!
-// extension PathExtension on RouteEnum {
-//   String path() {
-//     switch (this) {
-//       case RouteEnum.home:
-//         return HomeRoute.path;
-//       case RouteEnum.search:
-//         return SearchRoute.path;
-//       case RouteEnum.cook:
-//         return CookRoute.path;
-//       case RouteEnum.settings:
-//         return SettingsRoute.path;
-//       default:
-//         throw Exception('Route path not implemented!');
-//     }
-//   }
-// }
-
+// Note: Let's use switch-case to return the GoRoute for each route,
+// so that if we miss a route, the code editor gives us a warning.
 extension GoRouteExtension on RouteEnum {
-  GoRoute get goRoute => {
-        RouteEnum.home: GoRoute(
+  GoRoute goRoute() {
+    switch (this) {
+      case RouteEnum.home:
+        return GoRoute(
           path: HomeRoute.path,
           builder: (context, state) => HomeRoute().build(context, state),
-        ),
-        RouteEnum.search: GoRoute(
+        );
+      case RouteEnum.search:
+        return GoRoute(
           path: SearchRoute.path,
           builder: (context, state) => SearchRoute().build(context, state),
-        ),
-        RouteEnum.cook: GoRoute(
+        );
+      case RouteEnum.cook:
+        return GoRoute(
           path: CookRoute.path,
           builder: (context, state) => CookRoute().build(context, state),
-        ),
-        RouteEnum.settings: GoRoute(
+        );
+      case RouteEnum.settings:
+        return GoRoute(
           path: SettingsRoute.path,
           builder: (context, state) => SettingsRoute().build(context, state),
-        ),
-      }[this]!;
+        );
+      default:
+        throw Exception('GoRoute not implemented!');
+    }
+  }
 }
 
-List<GoRoute> routes = RouteEnum.values.map((e) => e.goRoute).toList();
+List<GoRoute> routes = RouteEnum.values.map((e) => e.goRoute()).toList();
 
-final router = GoRouter(routes: routes);
+final router = GoRouter(
+  routes: routes,
+  observers: [TalkerRouteObserver(logger.talker!)],
+);

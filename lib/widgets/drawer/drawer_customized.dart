@@ -17,7 +17,7 @@ class DrawerCustomized extends StatelessWidget {
             (route) => DrawerRoute(
               routeLabel: route.label,
               iconData: route.iconData,
-              path: route.path,
+              path: route.path(),
             ),
           ),
         ].toList(),

@@ -32,6 +32,7 @@ In the tests as little as possible has been mocked (meaning that currently only 
 - **GRAPHQL CLIENT:** For the GraphQL client, the more recent **[Ferry](https://ferrygraphql.com)** was first considered, but it seemed quite "code-generation-heavy" and is based on StreamBuilder and Built value which were not desired. So the "traditional" **[graphql](https://pub.dev/packages/graphql)** was chosen. The GraphQL client connects to the **/api/graphql** of **[the Cookbook companion Next.js web app](https://github.com/tsirbunen/cookbook/)**.
 - **STATE MANAGEMENT:** The **[riverpod](https://riverpod.dev/docs/introduction/why_riverpod)** package was chosen for state management mainly out of curiosity.
 - **TEST MOCKING:** For test mocking, the **[mockito](https://pub.dev/packages/mockito)** package was selected.
+- **LOGGING:** For advanced logging, the **[Talker](https://pub.dev/packages/talker)** package was selected (along with **[talker_flutter](https://github.com/Frezyx/talker/tree/master/packages/talker_flutter)** and **[talker_riverpod_logger](https://github.com/Frezyx/talker/tree/master/packages/talker_riverpod_logger)**). The talker was wrapped with a custom Logger to enable possible later switch to another logger and to customize the log.
 
 ### Directory structure
 

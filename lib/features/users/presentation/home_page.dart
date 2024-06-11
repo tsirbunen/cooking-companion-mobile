@@ -12,7 +12,7 @@ class HomePage extends ConsumerWidget {
     // FIXME: Remove these temporary testing lines
     final valueAsync = ref.watch(initialRecipesProvider);
     valueAsync.when(
-      data: (data) => print('DATA $data'),
+      data: (data) => print('DATA ${data?.length}'),
       loading: () => print('LOADING HOME'),
       error: (error, stackTrace) => print('error $error'),
     );
