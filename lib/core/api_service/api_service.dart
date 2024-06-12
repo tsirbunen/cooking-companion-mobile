@@ -10,14 +10,14 @@ const apiErrorLabel = 'Api error:';
 const defaultException = 'Oops! Some error occurred...';
 
 // Note: We will not make this class a singleton. Instead, we use the
-// api client client trough a riverpod provider.
-class ApiClient {
+// api service trough a riverpod provider.
+class ApiService {
   late HttpLink _httpLink;
   late GraphQLClient _graphQLClient;
 
   // Note: The optional client parameter is allowed here so that a mock client
   // can be injected during testing.
-  ApiClient initialize({
+  ApiService initialize({
     GraphQLClient? client,
     bool withQueryInterceptor = false,
   }) {

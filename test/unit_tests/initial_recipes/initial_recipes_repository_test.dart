@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mobile/core/api_service/api_client_provider.dart';
+import 'package:mobile/core/api_service/api_service_provider.dart';
 import 'package:mobile/features/recipes/application/initial_recipes_provider.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/repository/graph_ql.dart';
 import 'package:mobile/features/recipes/repository/repository_provider.dart';
-import '../../test_utils/api_client/test_api_client.dart';
+import '../../test_utils/api_service/test_api_service.dart';
 import '../../test_utils/listener/test_listener.dart';
 import '../../test_utils/provider_container/test_provider_container.dart';
 import '../../test_utils/data/initial_recipes_test_data.dart';
@@ -18,12 +18,12 @@ void main() {
       testWidgets('fetches recipes and converts them to model objects',
           (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(
+        final apiService = getTestApiService(
           query: query,
           responseData: queryResponseData,
         );
         final container = createTestProviderContainer(
-          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+          overrides: [apiServiceProvider.overrideWithValue(apiService)],
         );
 
         final response =
@@ -38,9 +38,9 @@ void main() {
 
       testWidgets('on api client exception returns a failure', (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(query: query, isException: true);
+        final apiService = getTestApiService(query: query, isException: true);
         final container = createTestProviderContainer(
-          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+          overrides: [apiServiceProvider.overrideWithValue(apiService)],
         );
 
         final response =
@@ -54,12 +54,12 @@ void main() {
           'holds recipes as model objects in its state (aka "future") once built',
           (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(
+        final apiService = getTestApiService(
           query: query,
           responseData: queryResponseData,
         );
         final ProviderContainer container = createTestProviderContainer(
-          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+          overrides: [apiServiceProvider.overrideWithValue(apiService)],
         );
 
         // Note: We need to add a listener to keep the notifier provider alive
@@ -81,12 +81,12 @@ void main() {
 
       testWidgets('on api exception throws exception', (tester) async {
         final query = InitialRecipesQuery();
-        final apiClient = getTestApiClient(
+        final apiService = getTestApiService(
           query: query,
           isException: true,
         );
         final ProviderContainer container = createTestProviderContainer(
-          overrides: [apiClientProvider.overrideWithValue(apiClient)],
+          overrides: [apiServiceProvider.overrideWithValue(apiService)],
         );
 
         // Note: We need to add a listener to keep the notifier provider alive
