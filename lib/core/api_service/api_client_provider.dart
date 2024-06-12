@@ -10,6 +10,6 @@ final apiClientProvider = Provider<ApiClient>((ref) {
 });
 
 Future<Override> getApiClientProviderOverride() async {
-  final apiClient = ApiClient().initialize();
+  final apiClient = ApiClient().initialize(withQueryInterceptor: true);
   return apiClientProvider.overrideWithValue(apiClient);
 }

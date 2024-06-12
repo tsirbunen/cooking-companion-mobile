@@ -1,4 +1,6 @@
 import 'package:graphql/client.dart';
+import 'package:mobile/core/api_service/graphql_query_interceptor.dart';
+import 'dart:async';
 import 'package:mobile/utils/either/either.dart';
 import 'package:mobile/utils/failure/failure.dart';
 
@@ -7,16 +9,26 @@ const apiUrl = 'https://cookbook-dusky.vercel.app/api/graphql';
 const apiErrorLabel = 'Api error:';
 const defaultException = 'Oops! Some error occurred...';
 
+// Note: We will not make this class a singleton. Instead, we use the
+// api client client trough a riverpod provider.
 class ApiClient {
   late HttpLink _httpLink;
   late GraphQLClient _graphQLClient;
 
   // Note: The optional client parameter is allowed here so that a mock client
   // can be injected during testing.
-  ApiClient initialize({GraphQLClient? client}) {
+  ApiClient initialize({
+    GraphQLClient? client,
+    bool withQueryInterceptor = false,
+  }) {
     _httpLink = HttpLink(apiUrl);
-    _graphQLClient =
-        client ?? GraphQLClient(link: _httpLink, cache: GraphQLCache());
+    _graphQLClient = client ??
+        GraphQLClient(
+          link: withQueryInterceptor
+              ? GraphQLQueryInterceptor(_httpLink)
+              : _httpLink,
+          cache: GraphQLCache(),
+        );
     return this;
   }
 
