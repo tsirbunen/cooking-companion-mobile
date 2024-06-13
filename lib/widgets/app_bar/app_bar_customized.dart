@@ -9,16 +9,26 @@ class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
+    final colors = Theme.of(context).colorScheme;
+
+    return Container(
       height: appBarHeight,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      decoration: BoxDecoration(color: colors.secondaryContainer),
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          MenuButton(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AppTitle(),
+              MenuButton(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  AppTitle(),
+                ],
+              ),
             ],
           ),
         ],

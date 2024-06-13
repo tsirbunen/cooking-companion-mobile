@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/core/api_service/api_service_provider.dart';
 import 'package:mobile/core/app/app.dart';
 import 'package:mobile/core/logger/provider_logger_logger.dart';
+import 'package:mobile/core/theme/app_status_bar_color.dart';
 import 'package:mobile/widgets/launch/launch_widget.dart';
 
 void main() async {
+  setAppStatusBarColor();
+
   // Note: While the connections to the api server and the shared preferences
   // are being set up, display a launch widget to the user.
   runApp(const LaunchWidget());

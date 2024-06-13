@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/widgets/page_base/page_base.dart';
+
+const double menuButtonContainerSize = 55.0;
+const double menuIconSize = 40.0;
 
 class MenuButton extends StatelessWidget {
   const MenuButton({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.menu_outlined),
-      onPressed: () => _openDrawer(context),
+    final colors = Theme.of(context).colorScheme;
+
+    return SizedBox(
+      width: menuButtonContainerSize,
+      height: menuButtonContainerSize,
+      child: IconButton(
+        icon: Icon(
+          Icons.menu_outlined,
+          size: menuIconSize,
+          color: colors.secondary,
+        ),
+        onPressed: () => _openDrawer(context),
+      ),
     );
   }
 
   void _openDrawer(BuildContext context) {
-    debugPrint('Open drawer');
     Scaffold.of(context).openDrawer();
-    // scaffoldKey.currentState!.openDrawer();
   }
 }

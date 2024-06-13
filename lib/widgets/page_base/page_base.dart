@@ -3,7 +3,6 @@ import 'package:mobile/widgets/app_bar/app_bar_customized.dart';
 import 'package:mobile/widgets/drawer/drawer_customized.dart';
 
 const String notImplemented = 'Not implemented';
-// final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 class PageBase extends StatelessWidget {
   final Widget pageBody;
@@ -12,7 +11,6 @@ class PageBase extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // key: scaffoldKey,
       appBar: const AppBarCustomized(),
       drawer: const DrawerCustomized(),
       body: LayoutBuilder(
