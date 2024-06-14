@@ -47,6 +47,7 @@ dependencies:
   talker: ^4.2.4
   talker_flutter: ^4.2.4
   talker_riverpod_logger: ^1.0.4
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

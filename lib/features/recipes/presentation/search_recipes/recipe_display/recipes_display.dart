@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/recipe_cards_grid.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_display_type_enum.dart';
+import 'package:mobile/widgets/animated_floating_actions/action_config.dart';
+import 'package:mobile/widgets/animated_floating_actions/animated_floating_actions.dart';
 import 'package:mobile/widgets/app_bar/app_bar_customized.dart';
+
+const floatingActionsMargin = 20.0;
 
 class RecipesDisplay extends StatelessWidget {
   final RecipeDisplayType displayType = RecipeDisplayType.card;
@@ -21,10 +25,32 @@ class RecipesDisplay extends StatelessWidget {
 
     final size = _getRecipeContainerSize(context);
 
-    return SizedBox(
-      width: size.width,
-      height: size.height,
-      child: content,
+    return Stack(
+      children: [
+        SizedBox(
+          width: size.width,
+          height: size.height,
+          child: content,
+        ),
+        Positioned(
+          right: floatingActionsMargin,
+          bottom: floatingActionsMargin,
+          child: AnimatedFloatingActions(
+            actionConfigs: [
+              ActionConfig(
+                label: 'display_type',
+                iconData: Icons.grid_view,
+                onPressed: _toggleDisplayType,
+              ),
+              ActionConfig(
+                label: 'pick_multiple',
+                iconData: Icons.layers,
+                onPressed: _togglePickMultiple,
+              ),
+            ],
+          ),
+        )
+      ],
     );
   }
 
@@ -32,4 +58,8 @@ class RecipesDisplay extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Size(size.width, size.height - appBarHeight);
   }
+
+  void _toggleDisplayType() {}
+
+  void _togglePickMultiple() {}
 }
