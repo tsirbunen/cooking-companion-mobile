@@ -13,6 +13,11 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: veryPale,
         ),
+        titleSmall: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+          color: dark,
+        ),
         headlineMedium: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
@@ -22,11 +27,14 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: dark,
         brightness: Brightness.light,
+        primary: veryDark,
+        primaryContainer: veryPale,
         secondary: veryPale,
         secondaryContainer: veryDark,
         tertiary: medium,
         tertiaryContainer: pale,
         onTertiary: dark,
+        onTertiaryFixed: extremelyPale,
       ),
     );
   }

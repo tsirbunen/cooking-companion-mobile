@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/recipes/presentation/cook_recipes/cook_page.dart';
 import 'package:mobile/features/users/presentation/home_page.dart';
-import 'package:mobile/features/recipes/presentation/search_recipes/search_page.dart';
+import 'package:mobile/features/recipes/presentation/search_recipes/page/search_page.dart';
 import 'package:mobile/features/users/presentation/settings_page.dart';
 
 // Note: We want to use type-safe routes, and for that, go_router supports using routes
