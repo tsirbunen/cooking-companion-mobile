@@ -53,17 +53,21 @@ class AnimatedFloatingActionsState extends State<AnimatedFloatingActions>
     shouldExpand ? _controller.forward() : _controller.reverse();
   }
 
-  Size _getStackContainerSize(int actionsCount) {
-    final height =
-        masterButtonSize + (actionsCount * (iconSize + actionButtonSpacing));
+  Size _getStackContainerSize(int actionsCount, bool showLabels) {
+    final spacing =
+        showLabels ? actionButtonSpacingWithLabel : actionButtonSpacing;
+    final height = masterButtonSize + (actionsCount * (iconSize + spacing));
     // Note: The extra pixels are added to the height and width to prevent
     // the content from being cut off
-    return Size(masterButtonSize + 1, height + 1);
+    return Size(masterButtonSize + 1, height + 5);
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = _getStackContainerSize(widget.actionConfigs.length);
+    // FIXME: Add to settings the possiblility to toggle this property
+    const bool showLabels = true;
+    final size =
+        _getStackContainerSize(widget.actionConfigs.length, showLabels);
 
     return SizedBox(
       width: size.width,
@@ -75,6 +79,7 @@ class AnimatedFloatingActionsState extends State<AnimatedFloatingActions>
               config: config,
               expansion: _expansion,
               index: index,
+              showLabel: showLabels,
             ),
           ),
           MasterButton(

@@ -6,7 +6,7 @@ import 'package:mobile/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/widgets/animated_floating_actions/animated_floating_actions.dart';
 import 'package:mobile/widgets/app_bar/app_bar_customized.dart';
 
-const floatingActionsMargin = 20.0;
+const floatingActionsMargin = 15.0;
 
 class RecipesDisplay extends StatelessWidget {
   final RecipeDisplayType displayType = RecipeDisplayType.card;
@@ -38,15 +38,45 @@ class RecipesDisplay extends StatelessWidget {
           child: AnimatedFloatingActions(
             actionConfigs: [
               ActionConfig(
-                label: 'display_type',
+                label: 'next type',
                 iconData: Icons.grid_view,
                 onPressed: _toggleDisplayType,
               ),
               ActionConfig(
-                label: 'pick_multiple',
+                label: 'pick many',
                 iconData: Icons.layers,
                 onPressed: _togglePickMultiple,
               ),
+              // ActionConfig(
+              //   label: 'photos',
+              //   iconData: Icons.grid_view,
+              //   onPressed: _toggleDisplayType,
+              // ),
+              // ActionConfig(
+              //   label: 'pick many',
+              //   iconData: Icons.layers,
+              //   onPressed: _togglePickMultiple,
+              // ),
+              // ActionConfig(
+              //   label: 'photos',
+              //   iconData: Icons.grid_view,
+              //   onPressed: _toggleDisplayType,
+              // ),
+              // ActionConfig(
+              //   label: 'pick many',
+              //   iconData: Icons.layers,
+              //   onPressed: _togglePickMultiple,
+              // ),
+              // ActionConfig(
+              //   label: 'next type',
+              //   iconData: Icons.grid_view,
+              //   onPressed: _toggleDisplayType,
+              // ),
+              // ActionConfig(
+              //   label: 'pick many',
+              //   iconData: Icons.layers,
+              //   onPressed: _togglePickMultiple,
+              // ),
             ],
           ),
         )

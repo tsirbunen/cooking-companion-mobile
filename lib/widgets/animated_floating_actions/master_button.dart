@@ -14,16 +14,26 @@ class MasterButton extends StatelessWidget {
       right: 0.0,
       bottom: 0.0,
       child: Material(
-        shape: const CircleBorder(),
         elevation: elevation,
-        child: FloatingActionButton(
-          onPressed: onPressed,
-          elevation: elevation,
-          backgroundColor: colors.secondaryContainer,
-          child: Icon(
-            Icons.build,
-            size: iconSize,
-            color: colors.secondary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(masterButtonBorderRadius),
+        ),
+        child: Center(
+          child: Ink(
+            decoration: ShapeDecoration(
+              color: colors.secondaryContainer,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(masterButtonBorderRadius),
+              ),
+            ),
+            child: IconButton(
+              icon: const Icon(
+                Icons.build,
+                size: iconSize,
+              ),
+              color: colors.secondary,
+              onPressed: onPressed,
+            ),
           ),
         ),
       ),

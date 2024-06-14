@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/widgets/animated_floating_actions/action_button_label.dart';
 import 'package:mobile/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/widgets/animated_floating_actions/constant_values.dart';
 
@@ -10,16 +11,22 @@ class ActionButton extends StatelessWidget {
   final ActionConfig config;
   final Animation<double> expansion;
   final int index;
+  final bool showLabel;
 
   const ActionButton({
     super.key,
     required this.config,
     required this.expansion,
     required this.index,
+    required this.showLabel,
   });
 
   double _calculateTargetOffset() {
-    return firstButtonOffset + index * (iconSize + actionButtonSpacing);
+    final spacing =
+        showLabel ? actionButtonSpacingWithLabel : actionButtonSpacing;
+    final baseOffset =
+        showLabel ? firstButtonOffsetWithLabel : firstButtonOffset;
+    return baseOffset + index * (iconSize + spacing);
   }
 
   @override
@@ -40,26 +47,32 @@ class ActionButton extends StatelessWidget {
       },
       child: FadeTransition(
         opacity: expansion,
-        child: Material(
-          elevation: elevation,
-          shape: const CircleBorder(),
-          clipBehavior: Clip.antiAlias,
-          child: Center(
-            child: Ink(
-              decoration: ShapeDecoration(
-                color: colors.secondaryContainer,
-                shape: const CircleBorder(),
-              ),
-              child: IconButton(
-                icon: Icon(
-                  config.iconData,
-                  size: iconSize,
+        child: Column(
+          children: [
+            Material(
+              elevation: showLabel ? 0.0 : elevation,
+              shape: const CircleBorder(),
+              clipBehavior: Clip.antiAlias,
+              child: Center(
+                child: Ink(
+                  decoration: ShapeDecoration(
+                    color: colors.secondaryContainer,
+                    shape: const CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(
+                      config.iconData,
+                      size: iconSize,
+                    ),
+                    color: colors.secondary,
+                    onPressed: config.onPressed,
+                  ),
                 ),
-                color: colors.secondary,
-                onPressed: config.onPressed,
               ),
             ),
-          ),
+            const SizedBox(height: labelPaddingTop),
+            if (showLabel) ActionButtonLabel(label: config.label),
+          ],
         ),
       ),
     );
