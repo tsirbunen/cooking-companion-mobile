@@ -23,6 +23,11 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: dark,
         ),
+        headlineSmall: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: dark,
+        ),
       ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: dark,

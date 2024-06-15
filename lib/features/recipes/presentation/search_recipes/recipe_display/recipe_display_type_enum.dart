@@ -1,3 +1,0 @@
-enum RecipeDisplayType {
-  card,
-}

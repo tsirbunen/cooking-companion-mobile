@@ -8,7 +8,14 @@ import 'package:mobile/widgets/ink_well_overlay_stack/ink_well_overlay_stack.dar
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
   final bool isSelected;
-  const RecipeCard({super.key, required this.recipe, this.isSelected = false});
+  final void Function() togglePickRecipe;
+
+  const RecipeCard({
+    super.key,
+    required this.recipe,
+    required this.togglePickRecipe,
+    required this.isSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class RecipeCard extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         elevation: 5.0,
         child: InkWellOverlayStack(
-          onTap: _toggleSelectRecipe,
+          onTap: togglePickRecipe,
           width: dimensions.width,
           height: dimensions.height,
           child: Container(
@@ -46,10 +53,6 @@ class RecipeCard extends StatelessWidget {
         ),
       );
     });
-  }
-
-  void _toggleSelectRecipe() {
-    print('Recipe selected');
   }
 
   BoxDecoration _getCardDecoration(BuildContext context, bool isSelected) {
