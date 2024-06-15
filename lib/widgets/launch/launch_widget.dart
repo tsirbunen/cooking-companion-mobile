@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/widgets/progress_indicator/progress_indicator_xl.dart';
 
-const launchingText = 'Launching, please wait...';
+const launchingText = 'Launching the , please wait...';
 
 class LaunchWidget extends StatelessWidget {
   const LaunchWidget({super.key});
@@ -11,10 +12,7 @@ class LaunchWidget extends StatelessWidget {
       home: Scaffold(
         body: Center(
           child: Column(
-            children: <Widget>[
-              Text(launchingText),
-              CircularProgressIndicator()
-            ],
+            children: <Widget>[Text(launchingText), ProgressIndicatorXL()],
           ),
         ),
       ),

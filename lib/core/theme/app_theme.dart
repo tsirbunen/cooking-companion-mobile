@@ -9,7 +9,7 @@ class AppTheme {
       fontFamily: 'Quicksand',
       textTheme: const TextTheme(
         titleMedium: TextStyle(
-          fontSize: 24,
+          fontSize: 20,
           fontWeight: FontWeight.w600,
           color: veryPale,
         ),
@@ -40,6 +40,7 @@ class AppTheme {
         tertiaryContainer: pale,
         onTertiary: dark,
         onTertiaryFixed: extremelyPale,
+        tertiaryFixedDim: veryPale,
       ),
     );
   }

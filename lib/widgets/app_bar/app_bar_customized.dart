@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/widgets/app_bar/app_title.dart';
+import 'package:mobile/widgets/app_bar/app_title_with_route.dart';
 import 'package:mobile/widgets/app_bar/menu_button.dart';
 
-const double appBarHeight = 85.0;
+const double appBarHeight = 90.0;
 
 class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
   const AppBarCustomized({super.key});
@@ -14,24 +14,30 @@ class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
     return Container(
       height: appBarHeight,
       decoration: BoxDecoration(color: colors.secondaryContainer),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              MenuButton(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AppTitle(),
-                ],
-              ),
-            ],
-          ),
-        ],
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                MenuButton(),
+                SizedBox(width: 10.0),
+                // Note: There will be other widgets here in the future,
+                // hence the use of a row.
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppTitleWithRoute(),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

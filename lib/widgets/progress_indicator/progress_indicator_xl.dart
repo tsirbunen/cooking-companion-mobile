@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProgressIndicator extends StatefulWidget {
-  const ProgressIndicator({super.key});
+class ProgressIndicatorXL extends StatefulWidget {
+  const ProgressIndicatorXL({super.key});
 
   @override
-  State<ProgressIndicator> createState() => _ProgressIndicatorState();
+  State<ProgressIndicatorXL> createState() => _ProgressIndicatorXLState();
 }
 
-class _ProgressIndicatorState extends State<ProgressIndicator>
+class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<Color?> _animation;
