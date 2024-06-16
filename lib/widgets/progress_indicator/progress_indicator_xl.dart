@@ -17,7 +17,7 @@ class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
     return Transform.scale(
       scale: 2.0,
       child: CircularProgressIndicator(
-        strokeWidth: 10.0,
+        strokeWidth: 5.0,
         strokeCap: StrokeCap.round,
         valueColor: _animation,
       ),

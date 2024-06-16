@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
-import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/constant_values.dart';
+import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/constants.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/image_in_card.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/title_in_card.dart';
 import 'package:mobile/widgets/ink_well_overlay_stack/ink_well_overlay_stack.dart';
@@ -69,9 +69,7 @@ class RecipeCard extends StatelessWidget {
     final width = constraints.maxWidth;
     final height = constraints.maxHeight;
     final isVeryLarge = width > showSingleCardInRowLimit;
-    final ratio = isVeryLarge
-        ? imageWidthPerHeightRatioSingleCardInRow
-        : imageWidthPerHeightRatio;
+    final ratio = isVeryLarge ? imageRatioSingleCardInRow : imageRatio;
     final imageHeight = width / ratio;
 
     return (

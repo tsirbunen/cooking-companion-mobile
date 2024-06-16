@@ -3,9 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/recipes/application/picked_recipe_ids_provider.dart';
 import 'package:mobile/features/recipes/application/viewing_config_provider.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
-import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/constant_values.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/recipe_card.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_title/recipe_title.dart';
+
+const double listPadding = 8.0;
 
 class RecipeTitlesList extends ConsumerWidget {
   final List<Recipe> recipes;
@@ -17,7 +18,7 @@ class RecipeTitlesList extends ConsumerWidget {
     final pickedRecipeIds = ref.watch(pickedRecipesProvider);
 
     return Padding(
-      padding: const EdgeInsets.all(gridPadding),
+      padding: const EdgeInsets.all(listPadding),
       child: ListView.builder(
         itemCount: recipes.length,
         itemBuilder: (BuildContext context, int index) {

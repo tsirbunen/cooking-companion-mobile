@@ -9,7 +9,7 @@ class CookingCompanionApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routerConfig: router,
-      theme: AppTheme().themeData,
+      theme: const AppTheme().themeData,
     );
   }
 }
