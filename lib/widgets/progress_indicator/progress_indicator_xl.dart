@@ -10,7 +10,7 @@ class ProgressIndicatorXL extends StatefulWidget {
 class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
-  late final Animation<Color?> _animation;
+  Animation<Color?>? _animation;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +27,15 @@ class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
     // Note: We need to do this async trick to get hold ot the context
     // to be able to access the colorScheme of our  app's theme.
     Future.delayed(Duration.zero, () {
       final colors = Theme.of(context).colorScheme;
-      _controller = AnimationController(
-        vsync: this,
-        duration: const Duration(seconds: 1),
-      );
 
       _animation = ColorTween(
         begin: colors.primary,
