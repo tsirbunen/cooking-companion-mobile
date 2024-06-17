@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/recipes/application/picked_recipe_ids_provider.dart';
-import 'package:mobile/features/recipes/application/viewing_config_provider.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
-import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/recipe_card.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_title/recipe_title.dart';
 
 const double listPadding = 8.0;

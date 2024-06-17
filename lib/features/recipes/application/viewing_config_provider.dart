@@ -20,7 +20,7 @@ class ViewingConfig {
     return ViewingConfig(
       showPickedRecipes: showPickedRecipes ?? this.showPickedRecipes,
       showSingleColumn: showSingleColumn ?? this.showSingleColumn,
-      displayMode: recipeDisplayMode ?? this.displayMode,
+      displayMode: recipeDisplayMode ?? displayMode,
     );
   }
 }
@@ -48,7 +48,6 @@ class ViewingConfigController extends AutoDisposeNotifier<ViewingConfig> {
   }
 
   void toggleRecipeDisplayMode() {
-    // FIXME: Update this once there are more than two display types
     final nextMode = state.displayMode == RecipeDisplayMode.card
         ? RecipeDisplayMode.title
         : RecipeDisplayMode.card;

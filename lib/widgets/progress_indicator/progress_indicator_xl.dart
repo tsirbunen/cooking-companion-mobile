@@ -32,8 +32,8 @@ class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
       duration: const Duration(seconds: 1),
     );
 
-    // Note: We need to do this async trick to get hold ot the context
-    // to be able to access the colorScheme of our  app's theme.
+    // Note: We need to do this async trick to get hold of the context
+    // to be able to access the color scheme of our  app's theme.
     Future.delayed(Duration.zero, () {
       final colors = Theme.of(context).colorScheme;
 
@@ -45,7 +45,7 @@ class _ProgressIndicatorXLState extends State<ProgressIndicatorXL>
           setState(() {});
         });
 
-      _controller.repeat();
+      _controller.repeat(reverse: true);
     });
   }
 
