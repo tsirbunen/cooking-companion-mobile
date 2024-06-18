@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/router/route_enum.dart';
 import 'package:mobile/core/router/route_enum_description_extension.dart';
 import 'package:mobile/core/router/route_enum_drawer_extension.dart';
+import 'package:mobile/core/router/route_enum_path_extension.dart';
 import 'package:mobile/widgets/drawer/route_icon.dart';
 import 'package:mobile/widgets/page_base/page_base.dart';
 
@@ -29,7 +31,7 @@ class HomePage extends StatelessWidget {
               style: infoStyle,
             ),
             ...RouteEnum.values.map(
-              (route) => PageDescription(route: route),
+              (route) => PageDescriptionWithNavigation(route: route),
             ),
           ],
         ),
@@ -38,10 +40,10 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class PageDescription extends StatelessWidget {
+class PageDescriptionWithNavigation extends StatelessWidget {
   final RouteEnum route;
 
-  const PageDescription({super.key, required this.route});
+  const PageDescriptionWithNavigation({super.key, required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,11 @@ class PageDescription extends StatelessWidget {
         );
     final descriptionStyle = Theme.of(context).textTheme.bodyMedium;
 
-    return Container(
-        margin: const EdgeInsets.only(top: padding),
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () => _navigateToRoute(context),
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: padding / 2),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,6 +84,12 @@ class PageDescription extends StatelessWidget {
               ),
             ),
           ],
-        ));
+        ),
+      ),
+    );
+  }
+
+  void _navigateToRoute(BuildContext context) {
+    context.go(route.path());
   }
 }
