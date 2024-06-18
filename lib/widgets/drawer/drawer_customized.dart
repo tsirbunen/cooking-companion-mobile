@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/core/router/router.dart';
+import 'package:mobile/core/router/route_enum_drawer_extension.dart';
+import 'package:mobile/core/router/route_enum_path_extension.dart';
 import 'package:mobile/widgets/drawer/drawer_route.dart';
 import 'package:mobile/widgets/drawer/route_header.dart';
-import 'package:mobile/widgets/drawer/route_enum_extension.dart';
+import 'package:mobile/core/router/route_enum.dart';
 
 const padding = 10.0;
 

@@ -28,6 +28,12 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: dark,
         ),
+        bodyMedium: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.normal,
+          color: veryDark,
+          height: 1.25,
+        ),
       ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: dark,

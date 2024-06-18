@@ -30,6 +30,14 @@ RouteBase get $homeRoute => GoRouteData.$route(
           path: '/settings',
           factory: $SettingsRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: '/shopping',
+          factory: $ShoppingRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: '/wizard',
+          factory: $WizardRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -89,6 +97,40 @@ extension $SettingsRouteExtension on SettingsRoute {
 
   String get location => GoRouteData.$location(
         '/settings',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ShoppingRouteExtension on ShoppingRoute {
+  static ShoppingRoute _fromState(GoRouterState state) => ShoppingRoute();
+
+  String get location => GoRouteData.$location(
+        '/shopping',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $WizardRouteExtension on WizardRoute {
+  static WizardRoute _fromState(GoRouterState state) => WizardRoute();
+
+  String get location => GoRouteData.$location(
+        '/wizard',
       );
 
   void go(BuildContext context) => context.go(location);
