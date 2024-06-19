@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/features/recipes/presentation/cook_recipes/cook_page.dart';
+import 'package:mobile/features/recipes/presentation/cook_recipes/cook_recipe/cook_recipe.dart';
+import 'package:mobile/features/recipes/presentation/cook_recipes/page/cook_page.dart';
 import 'package:mobile/features/users/presentation/home_page.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/page/search_page.dart';
 import 'package:mobile/features/users/presentation/settings_page.dart';
@@ -14,10 +15,13 @@ import 'package:mobile/features/users/presentation/wizard_page.dart';
 // to import the generated code parts.
 part 'routes.g.dart';
 
+const cookRecipePathRoot = 'cook-recipe';
+
 @TypedGoRoute<HomeRoute>(path: HomeRoute.path, routes: [
   TypedGoRoute<HomeRoute>(path: HomeRoute.path),
   TypedGoRoute<SearchRoute>(path: SearchRoute.path),
   TypedGoRoute<CookRoute>(path: CookRoute.path),
+  TypedGoRoute<CookRecipeRoute>(path: '${CookRoute.path}/:id'),
   TypedGoRoute<SettingsRoute>(path: SettingsRoute.path),
   TypedGoRoute<ShoppingRoute>(path: ShoppingRoute.path),
   TypedGoRoute<WizardRoute>(path: WizardRoute.path),
@@ -42,6 +46,17 @@ class CookRoute extends GoRouteData {
   static const path = '/cook';
   @override
   Widget build(BuildContext context, GoRouterState state) => const CookPage();
+}
+
+@immutable
+class CookRecipeRoute extends GoRouteData {
+  static const path = '/$cookRecipePathRoot/:id';
+  final int id;
+  const CookRecipeRoute({required this.id});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      CookRecipe(recipeId: id);
 }
 
 @immutable

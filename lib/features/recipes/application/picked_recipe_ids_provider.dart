@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final pickedRecipesProvider =
-    NotifierProvider.autoDispose<PickedRecipesController, List<int>>(
+    NotifierProvider<PickedRecipesController, List<int>>(
         PickedRecipesController.new);
 
-class PickedRecipesController extends AutoDisposeNotifier<List<int>> {
+class PickedRecipesController extends Notifier<List<int>> {
   @override
   List<int> build() {
     return [];

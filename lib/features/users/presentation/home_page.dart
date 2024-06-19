@@ -9,7 +9,7 @@ import 'package:mobile/widgets/page_base/page_base.dart';
 
 const String appIntroText =
     'Goodbye intrusive ads and sifting through lengthy blog posts. Welcome easy browsing and streamlined cooking of multiple recipes simultaneously on one site.';
-const double padding = 20.0;
+const double padding = 25.0;
 const double labelLineHeight = 1.75;
 
 class HomePage extends StatelessWidget {
@@ -57,7 +57,7 @@ class PageDescriptionWithNavigation extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       onTap: () => _navigateToRoute(context),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: padding / 2),
+        margin: const EdgeInsets.symmetric(vertical: padding / 1.5),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,

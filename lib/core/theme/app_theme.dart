@@ -29,7 +29,7 @@ class AppTheme {
           color: dark,
         ),
         bodyMedium: TextStyle(
-          fontSize: 18,
+          fontSize: 17,
           fontWeight: FontWeight.normal,
           color: veryDark,
           height: 1.25,

@@ -22,6 +22,18 @@ extension GoRouteExtension on RouteEnum {
           path: CookRoute.path,
           builder: (context, state) => CookRoute().build(context, state),
         );
+      // return GoRoute(
+      //   path: CookRoute.path,
+      //   builder: (context, state) {
+      //     final recipeId = state.pathParameters['id'];
+      //     if (recipeId == null) HomeRoute().build(context, state);
+
+      //     final id = int.tryParse(recipeId!);
+      //     if (id == null) HomeRoute().build(context, state);
+
+      //     return CookRoute(id: id!).build(context, state);
+      //   },
+      // );
       case RouteEnum.settings:
         return GoRoute(
           path: SettingsRoute.path,

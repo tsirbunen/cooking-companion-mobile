@@ -12,21 +12,24 @@ import 'package:mobile/features/recipes/repository/repository_provider.dart';
 /// with the notifier in state loading, and the build method asynchronously
 /// fetches the data when the provider is first accessed.
 final initialRecipesProvider =
-    AsyncNotifierProvider.autoDispose<InitialRecipesNotifier, List<Recipe>?>(
-        () {
+    AsyncNotifierProvider<InitialRecipesNotifier, List<Recipe>?>(() {
   return InitialRecipesNotifier();
 });
 
 /// Notifier holds (in its state field) a list of recipes as an AsyncValue
 /// (i.e. a value that can be in one of three states: data, loading, or error).
 /// The notifier acts as an adapter between the UI and the domain's use case logic.
-class InitialRecipesNotifier extends AutoDisposeAsyncNotifier<List<Recipe>?> {
+// class InitialRecipesNotifier extends AutoDisposeAsyncNotifier<List<Recipe>?> {
+class InitialRecipesNotifier extends AsyncNotifier<List<Recipe>?> {
   @override
   FutureOr<List<Recipe>?> build() async {
+    print('\n\nInitialRecipesNotifier.build');
     return await fetch();
   }
 
   FutureOr<List<Recipe>?> fetch() async {
+    // Note: Official documentation advices not to use read as the build calls
+    // this fetch method.
     final repository = ref.read(repositoryProvider);
     final useCase = InitialRecipesUseCase(repository);
     final Either<Failure, List<Recipe>> result =

@@ -26,10 +26,10 @@ class ViewingConfig {
 }
 
 final viewingConfigProvider =
-    NotifierProvider.autoDispose<ViewingConfigController, ViewingConfig>(
+    NotifierProvider<ViewingConfigController, ViewingConfig>(
         ViewingConfigController.new);
 
-class ViewingConfigController extends AutoDisposeNotifier<ViewingConfig> {
+class ViewingConfigController extends Notifier<ViewingConfig> {
   @override
   ViewingConfig build() {
     return ViewingConfig(

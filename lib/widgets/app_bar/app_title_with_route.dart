@@ -4,6 +4,7 @@ const String appTitle = 'Cooking companion';
 const String defaultRoute = 'HOME';
 const double textHeight = 1.15;
 const double routeFontSize = 22.0;
+const String recipeInCookingRouteLabel = 'RECIPE IN COOKING';
 
 class AppTitleWithRoute extends StatelessWidget {
   const AppTitleWithRoute({super.key});
@@ -29,10 +30,12 @@ class AppTitleWithRoute extends StatelessWidget {
   }
 
   String _getCurrentRoute(BuildContext context) {
-    final routeRaw =
-        (ModalRoute.of(context)?.settings.name?.replaceAll('/', ''));
-    if (routeRaw == null || routeRaw.isEmpty) return defaultRoute;
-    return routeRaw.toUpperCase();
+    final routeRaw = ModalRoute.of(context)?.settings.name;
+    if (routeRaw == null || routeRaw.isEmpty || routeRaw == '/') {
+      return defaultRoute;
+    }
+
+    return routeRaw.split('/')[1].replaceAll('-', ' ').toUpperCase();
   }
 
   TextStyle _getTitleStyle(TextStyle baseStyle, ColorScheme colors) {

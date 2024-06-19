@@ -62,8 +62,7 @@ class _ImageInCardState extends State<ImageInCard>
   @override
   void dispose() {
     _controller.dispose();
-    // FIXME: Do we need to assign the image stream listener to a variable
-    // and then remove it?
+    // FIXME: HOW TO DISPOSE OF THE LISTENER?
     super.dispose();
   }
 
@@ -83,6 +82,7 @@ class _ImageInCardState extends State<ImageInCard>
 
   void _animateImageFadeInOnImageUploadCompleted() {
     final listener = ImageStreamListener((ImageInfo info, bool syncCall) {
+      if (mounted == false) return;
       setState(() {
         _isLoading = false;
       });

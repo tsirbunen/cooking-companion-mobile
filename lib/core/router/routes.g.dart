@@ -27,6 +27,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           factory: $CookRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: '/cook/:id',
+          factory: $CookRecipeRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: '/settings',
           factory: $SettingsRouteExtension._fromState,
         ),
@@ -80,6 +84,25 @@ extension $CookRouteExtension on CookRoute {
 
   String get location => GoRouteData.$location(
         '/cook',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $CookRecipeRouteExtension on CookRecipeRoute {
+  static CookRecipeRoute _fromState(GoRouterState state) => CookRecipeRoute(
+        id: int.parse(state.pathParameters['id']!),
+      );
+
+  String get location => GoRouteData.$location(
+        '/cook/${Uri.encodeComponent(id.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);
