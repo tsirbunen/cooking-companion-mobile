@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile/core/router/routes.dart';
+import 'package:mobile/features/recipes/application/picked_recipe_ids_provider.dart';
 
 const String appTitle = 'Cooking companion';
 const String defaultRoute = 'HOME';
@@ -6,11 +9,11 @@ const double textHeight = 1.15;
 const double routeFontSize = 22.0;
 const String recipeInCookingRouteLabel = 'RECIPE IN COOKING';
 
-class AppTitleWithRoute extends StatelessWidget {
+class AppTitleWithRoute extends ConsumerWidget {
   const AppTitleWithRoute({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final baseStyle = Theme.of(context).textTheme.titleMedium;
     final colors = Theme.of(context).colorScheme;
 
@@ -22,20 +25,33 @@ class AppTitleWithRoute extends StatelessWidget {
           style: _getTitleStyle(baseStyle!, colors),
         ),
         Text(
-          _getCurrentRoute(context),
+          _getCurrentRoute(context, ref),
           style: _getRouteStyle(baseStyle, colors),
         ),
       ],
     );
   }
 
-  String _getCurrentRoute(BuildContext context) {
-    final routeRaw = ModalRoute.of(context)?.settings.name;
+  String _getCurrentRoute(BuildContext context, WidgetRef ref) {
+    final routeSettings = ModalRoute.of(context)?.settings;
+    final routeRaw = routeSettings?.name;
     if (routeRaw == null || routeRaw.isEmpty || routeRaw == '/') {
       return defaultRoute;
     }
+    final routeParts = routeRaw.split('/');
 
-    return routeRaw.split('/')[1].replaceAll('-', ' ').toUpperCase();
+    String route = routeParts[1].replaceAll('-', ' ').toUpperCase();
+    if (!routeRaw.contains(cookRecipePathRoot)) return route;
+
+    final routeArgs = routeSettings?.arguments;
+    if (routeArgs == null) return route;
+
+    final recipeId = int.tryParse((routeArgs as Map)['id']) ?? -1;
+    final pickedRecipeIds = ref.read(pickedRecipesProvider);
+    final indexOfRecipe = pickedRecipeIds.indexOf(recipeId);
+    if (indexOfRecipe == -1) return route;
+
+    return '$route ${indexOfRecipe + 1}/${pickedRecipeIds.length}';
   }
 
   TextStyle _getTitleStyle(TextStyle baseStyle, ColorScheme colors) {
