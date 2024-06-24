@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile/features/recipes/application/picked_recipe_ids_provider.dart';
+import 'package:mobile/features/recipes/application/picked_recipes_provider/picked_recipe_ids_provider.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/title_in_card.dart';
 

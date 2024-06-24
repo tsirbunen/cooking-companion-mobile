@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mobile/core/api_service/api_service_provider.dart';
-import 'package:mobile/features/recipes/application/initial_recipes_provider.dart';
+import 'package:mobile/features/recipes/application/initial_recipes_provider/initial_recipes_provider.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/repository/graph_ql.dart';
 import 'package:mobile/features/recipes/repository/repository_provider.dart';

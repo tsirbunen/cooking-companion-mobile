@@ -12,6 +12,7 @@ extension GoRouteExtension on RouteEnum {
           path: HomeRoute.path,
           builder: (context, state) => HomeRoute().build(context, state),
         );
+
       case RouteEnum.search:
         return GoRoute(
           path: SearchRoute.path,

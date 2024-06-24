@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile/core/logger/logger.dart';
 import 'package:mobile/core/router/routes.dart';
-import 'package:mobile/features/recipes/application/picked_recipe_ids_provider.dart';
+import 'package:mobile/features/recipes/application/picked_recipes_provider/picked_recipe_ids_provider.dart';
 
 const String appTitle = 'Cooking companion';
 const String defaultRoute = 'HOME';
 const double textHeight = 1.15;
 const double routeFontSize = 22.0;
 const String recipeInCookingRouteLabel = 'RECIPE IN COOKING';
+const String cookRecipeLabel = 'COOK RECIPE';
 
 class AppTitleWithRoute extends ConsumerWidget {
   const AppTitleWithRoute({super.key});
@@ -34,24 +37,35 @@ class AppTitleWithRoute extends ConsumerWidget {
 
   String _getCurrentRoute(BuildContext context, WidgetRef ref) {
     final routeSettings = ModalRoute.of(context)?.settings;
+    try {
+      final routerState = GoRouterState.of(context);
+
+      if (routerState.path == CookRecipeRoute.path) {
+        final String? idString = routerState.pathParameters['id'];
+        if (idString != null) {
+          final recipeId = int.parse(idString);
+
+          final pickedRecipeIds = ref.read(pickedRecipesProvider);
+          final indexOfRecipe = pickedRecipeIds.indexOf(recipeId);
+          if (indexOfRecipe != -1) {
+            return '$cookRecipeLabel ${indexOfRecipe + 1}/${pickedRecipeIds.length}';
+          }
+        }
+      }
+    } catch (e) {
+      logger.error('Error with go router state: $e', runtimeType);
+    }
+
     final routeRaw = routeSettings?.name;
+
     if (routeRaw == null || routeRaw.isEmpty || routeRaw == '/') {
       return defaultRoute;
     }
+
     final routeParts = routeRaw.split('/');
 
     String route = routeParts[1].replaceAll('-', ' ').toUpperCase();
-    if (!routeRaw.contains(cookRecipePathRoot)) return route;
-
-    final routeArgs = routeSettings?.arguments;
-    if (routeArgs == null) return route;
-
-    final recipeId = int.tryParse((routeArgs as Map)['id']) ?? -1;
-    final pickedRecipeIds = ref.read(pickedRecipesProvider);
-    final indexOfRecipe = pickedRecipeIds.indexOf(recipeId);
-    if (indexOfRecipe == -1) return route;
-
-    return '$route ${indexOfRecipe + 1}/${pickedRecipeIds.length}';
+    return route;
   }
 
   TextStyle _getTitleStyle(TextStyle baseStyle, ColorScheme colors) {

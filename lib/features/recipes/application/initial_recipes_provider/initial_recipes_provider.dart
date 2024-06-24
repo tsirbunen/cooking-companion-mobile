@@ -23,7 +23,6 @@ final initialRecipesProvider =
 class InitialRecipesNotifier extends AsyncNotifier<List<Recipe>?> {
   @override
   FutureOr<List<Recipe>?> build() async {
-    print('\n\nInitialRecipesNotifier.build');
     return await fetch();
   }
 

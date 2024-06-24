@@ -36,6 +36,7 @@ class AppTheme {
         ),
       ),
       colorScheme: ColorScheme.fromSeed(
+        surface: background,
         seedColor: dark,
         brightness: Brightness.light,
         primary: veryDark,

@@ -52,7 +52,8 @@ class CookRoute extends GoRouteData {
 class CookRecipeRoute extends GoRouteData {
   static const path = '/$cookRecipePathRoot/:id';
   final int id;
-  const CookRecipeRoute({required this.id});
+  final String name;
+  const CookRecipeRoute({required this.id, this.name = 'CookRecipeRoute'});
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile/features/recipes/application/viewing_config_provider.dart';
+import 'package:mobile/features/recipes/application/viewing_config_provider/viewing_config_provider.dart';
 import 'package:mobile/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/widgets/animated_floating_actions/animated_floating_actions.dart';
 

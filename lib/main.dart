@@ -19,7 +19,7 @@ void main() async {
   // respective providers.
   final apiServiceProviderOverride = await getApiServiceProviderOverride();
 
-  // Note: During development, we want to log the provider changes.
+  // Note: During development, we want to log the provider state changes.
   final providerLoggerObserver = getProviderLoggerObserver();
 
   return runApp(

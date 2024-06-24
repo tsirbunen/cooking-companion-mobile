@@ -6,13 +6,17 @@ const String notImplemented = 'Not implemented';
 
 class PageBase extends StatelessWidget {
   final Widget pageBody;
-  const PageBase({super.key, required this.pageBody});
+  final bool hideAppBar;
+  const PageBase({super.key, required this.pageBody, this.hideAppBar = false});
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Scaffold(
-      appBar: const AppBarCustomized(),
+      appBar: AppBarCustomized(hideContent: hideAppBar),
       drawer: const DrawerCustomized(),
+      backgroundColor: hideAppBar ? Colors.transparent : colors.surface,
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints viewportConstraints) {
           return SingleChildScrollView(

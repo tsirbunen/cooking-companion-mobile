@@ -20,3 +20,5 @@ extension DrawerExtension on RouteEnum {
         RouteEnum.wizard: 'Wizard',
       }[this]!;
 }
+
+final routeNames = RouteEnum.values.map((e) => e.label).toList();

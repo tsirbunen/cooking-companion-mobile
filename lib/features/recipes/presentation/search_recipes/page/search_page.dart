@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mobile/features/recipes/application/initial_recipes_provider.dart';
+import 'package:mobile/features/recipes/application/initial_recipes_provider/initial_recipes_provider.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/display/recipes_display.dart';
 import 'package:mobile/widgets/page_base/page_base.dart';
 import 'package:mobile/widgets/progress_indicator/progress_indicator_xl.dart';
