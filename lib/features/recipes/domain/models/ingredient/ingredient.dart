@@ -8,7 +8,7 @@ class Ingredient with _$Ingredient {
   const factory Ingredient({
     required int id,
     required String name,
-    int? amount,
+    double? amount,
     String? unit,
     int? previousId,
   }) = _Ingredient;

@@ -181,9 +181,14 @@ class CookingRecipesController {
     for (int i = 0; i < providersInOrder.length; i++) {
       final provider = providersInOrder[i];
       final recipe = recipes.length > i ? recipes[i] : null;
-      recipe != null
-          ? _setProviderRecipe(provider, recipe)
-          : _clearProviderRecipe(provider);
+      final history = recipe != null ? cookingRecipeHistory[recipe.id] : null;
+      if (history != null) {
+        ref.read(provider.notifier).setFromHistory(history);
+      } else {
+        recipe != null
+            ? _setProviderRecipe(provider, recipe)
+            : _clearProviderRecipe(provider);
+      }
     }
   }
 }

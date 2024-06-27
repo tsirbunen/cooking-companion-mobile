@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/constants.dart';
-import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/image_in_card.dart';
+import 'package:mobile/widgets/photo_with_fallback_icon/photo_with_fallback_icon.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/title_in_card.dart';
 import 'package:mobile/widgets/ink_well_overlay_stack/ink_well_overlay_stack.dart';
 
@@ -38,7 +38,7 @@ class RecipeCard extends StatelessWidget {
             height: dimensions.height,
             child: Column(
               children: [
-                ImageInCard(
+                PhotoWithFallbackIcon(
                   photo: recipe.photos?[0],
                   size: Size(dimensions.width, dimensions.imageHeight),
                 ),

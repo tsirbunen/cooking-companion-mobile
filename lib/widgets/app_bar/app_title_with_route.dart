@@ -40,7 +40,7 @@ class AppTitleWithRoute extends ConsumerWidget {
     try {
       final routerState = GoRouterState.of(context);
 
-      if (routerState.path == CookRecipeRoute.path) {
+      if (routerState.path == CookSingleRecipeRoute.path) {
         final String? idString = routerState.pathParameters['id'];
         if (idString != null) {
           final recipeId = int.parse(idString);

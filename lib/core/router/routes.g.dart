@@ -28,7 +28,7 @@ RouteBase get $homeRoute => GoRouteData.$route(
         ),
         GoRouteData.$route(
           path: '/cook/:id',
-          factory: $CookRecipeRouteExtension._fromState,
+          factory: $CookSingleRecipeRouteExtension._fromState,
         ),
         GoRouteData.$route(
           path: '/settings',
@@ -96,8 +96,9 @@ extension $CookRouteExtension on CookRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $CookRecipeRouteExtension on CookRecipeRoute {
-  static CookRecipeRoute _fromState(GoRouterState state) => CookRecipeRoute(
+extension $CookSingleRecipeRouteExtension on CookSingleRecipeRoute {
+  static CookSingleRecipeRoute _fromState(GoRouterState state) =>
+      CookSingleRecipeRoute(
         id: int.parse(state.pathParameters['id']!),
       );
 

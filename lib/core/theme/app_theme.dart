@@ -34,6 +34,11 @@ class AppTheme {
           color: veryDark,
           height: 1.25,
         ),
+        displayMedium: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w600,
+          color: veryDark,
+        ),
       ),
       colorScheme: ColorScheme.fromSeed(
         surface: background,

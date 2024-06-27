@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/features/recipes/presentation/cook_recipes/cook_recipe/cook_recipe.dart';
+import 'package:mobile/features/recipes/presentation/cook_recipes/cook_single_recipe/cook_single_recipe.dart';
 import 'package:mobile/features/recipes/presentation/cook_recipes/page/cook_page.dart';
 import 'package:mobile/features/users/presentation/home_page.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/page/search_page.dart';
@@ -21,7 +21,7 @@ const cookRecipePathRoot = 'cook-recipe';
   TypedGoRoute<HomeRoute>(path: HomeRoute.path),
   TypedGoRoute<SearchRoute>(path: SearchRoute.path),
   TypedGoRoute<CookRoute>(path: CookRoute.path),
-  TypedGoRoute<CookRecipeRoute>(path: '${CookRoute.path}/:id'),
+  TypedGoRoute<CookSingleRecipeRoute>(path: '${CookRoute.path}/:id'),
   TypedGoRoute<SettingsRoute>(path: SettingsRoute.path),
   TypedGoRoute<ShoppingRoute>(path: ShoppingRoute.path),
   TypedGoRoute<WizardRoute>(path: WizardRoute.path),
@@ -49,15 +49,21 @@ class CookRoute extends GoRouteData {
 }
 
 @immutable
-class CookRecipeRoute extends GoRouteData {
+class CookSingleRecipeRoute extends GoRouteData {
   static const path = '/$cookRecipePathRoot/:id';
   final int id;
-  final String name;
-  const CookRecipeRoute({required this.id, this.name = 'CookRecipeRoute'});
+  // final String name;
+  // final CookingProvider p;
+
+  const CookSingleRecipeRoute({
+    required this.id,
+    // this.name = 'CookRecipeRoute',
+    // required this.p,
+  });
 
   @override
   Widget build(BuildContext context, GoRouterState state) =>
-      CookRecipe(recipeId: id);
+      CookSingleRecipe(recipeId: id);
 }
 
 @immutable

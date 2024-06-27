@@ -22,7 +22,7 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) {
 mixin _$Ingredient {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int? get amount => throw _privateConstructorUsedError;
+  double? get amount => throw _privateConstructorUsedError;
   String? get unit => throw _privateConstructorUsedError;
   int? get previousId => throw _privateConstructorUsedError;
 
@@ -38,7 +38,8 @@ abstract class $IngredientCopyWith<$Res> {
           Ingredient value, $Res Function(Ingredient) then) =
       _$IngredientCopyWithImpl<$Res, Ingredient>;
   @useResult
-  $Res call({int id, String name, int? amount, String? unit, int? previousId});
+  $Res call(
+      {int id, String name, double? amount, String? unit, int? previousId});
 }
 
 /// @nodoc
@@ -72,7 +73,7 @@ class _$IngredientCopyWithImpl<$Res, $Val extends Ingredient>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
@@ -93,7 +94,8 @@ abstract class _$$IngredientImplCopyWith<$Res>
       __$$IngredientImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int? amount, String? unit, int? previousId});
+  $Res call(
+      {int id, String name, double? amount, String? unit, int? previousId});
 }
 
 /// @nodoc
@@ -125,7 +127,7 @@ class __$$IngredientImplCopyWithImpl<$Res>
       amount: freezed == amount
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       unit: freezed == unit
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
@@ -156,7 +158,7 @@ class _$IngredientImpl implements _Ingredient {
   @override
   final String name;
   @override
-  final int? amount;
+  final double? amount;
   @override
   final String? unit;
   @override
@@ -203,7 +205,7 @@ abstract class _Ingredient implements Ingredient {
   const factory _Ingredient(
       {required final int id,
       required final String name,
-      final int? amount,
+      final double? amount,
       final String? unit,
       final int? previousId}) = _$IngredientImpl;
 
@@ -215,7 +217,7 @@ abstract class _Ingredient implements Ingredient {
   @override
   String get name;
   @override
-  int? get amount;
+  double? get amount;
   @override
   String? get unit;
   @override

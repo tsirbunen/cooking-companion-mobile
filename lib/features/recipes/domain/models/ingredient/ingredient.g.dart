@@ -10,7 +10,7 @@ _$IngredientImpl _$$IngredientImplFromJson(Map<String, dynamic> json) =>
     _$IngredientImpl(
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
-      amount: (json['amount'] as num?)?.toInt(),
+      amount: (json['amount'] as num?)?.toDouble(),
       unit: json['unit'] as String?,
       previousId: (json['previousId'] as num?)?.toInt(),
     );

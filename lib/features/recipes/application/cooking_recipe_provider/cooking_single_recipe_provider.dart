@@ -8,10 +8,26 @@ typedef CookingProvider
 class CookingRecipe {
   final int recipeId;
   final Recipe recipe;
-  const CookingRecipe(this.recipeId, this.recipe);
+  bool isCooking;
+  List<int> ingredientsAdded;
+  List<int> instructionsDone;
 
-  int getRecipeId() {
-    return recipeId;
+  CookingRecipe(
+    this.recipeId,
+    this.recipe,
+    this.isCooking,
+    this.ingredientsAdded,
+    this.instructionsDone,
+  );
+
+  CookingRecipe copy() {
+    return CookingRecipe(
+      recipeId,
+      recipe,
+      isCooking,
+      [...ingredientsAdded],
+      [...instructionsDone],
+    );
   }
 }
 
@@ -33,7 +49,11 @@ class CookingSingleRecipeController extends Notifier<CookingRecipe?> {
   }
 
   void setRecipe(Recipe recipe) {
-    state = CookingRecipe(recipe.id, recipe);
+    state = CookingRecipe(recipe.id, recipe, false, [], []);
+  }
+
+  void setFromHistory(CookingRecipe data) {
+    state = data;
   }
 
   CookingRecipe? getRecipe() {
@@ -42,6 +62,49 @@ class CookingSingleRecipeController extends Notifier<CookingRecipe?> {
 
   void clearRecipe() {
     state = null;
+  }
+
+  toggleIsCooking() {
+    if (state == null) return;
+
+    state!.isCooking = !state!.isCooking;
+    state = state!.copy();
+  }
+
+  bool isCooking() {
+    return state?.isCooking ?? false;
+  }
+
+  toggleIngredient(int id) {
+    if (state == null) return;
+
+    if (state!.ingredientsAdded.contains(id)) {
+      state!.ingredientsAdded.remove(id);
+    } else {
+      state!.ingredientsAdded.add(id);
+    }
+
+    state = state!.copy();
+  }
+
+  getIngredientsAdded() {
+    return state?.ingredientsAdded ?? [];
+  }
+
+  toggleInstruction(int id) {
+    if (state == null) return;
+
+    if (state!.instructionsDone.contains(id)) {
+      state!.instructionsDone.remove(id);
+    } else {
+      state!.instructionsDone.add(id);
+    }
+
+    state = state!.copy();
+  }
+
+  getInstructionsDone() {
+    return state?.instructionsDone ?? [];
   }
 }
 

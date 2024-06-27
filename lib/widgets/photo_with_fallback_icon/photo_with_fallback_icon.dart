@@ -4,16 +4,16 @@ import 'package:mobile/widgets/no_image_icon_placeholder/no_image_icon_placehold
 
 const Duration fadeInDuration = Duration(milliseconds: 1500);
 
-class ImageInCard extends StatefulWidget {
+class PhotoWithFallbackIcon extends StatefulWidget {
   final Photo? photo;
   final Size size;
-  const ImageInCard({super.key, this.photo, required this.size});
+  const PhotoWithFallbackIcon({super.key, this.photo, required this.size});
 
   @override
-  State<ImageInCard> createState() => _ImageInCardState();
+  State<PhotoWithFallbackIcon> createState() => _PhotoWithFallbackIconState();
 }
 
-class _ImageInCardState extends State<ImageInCard>
+class _PhotoWithFallbackIconState extends State<PhotoWithFallbackIcon>
     with SingleTickerProviderStateMixin {
   NetworkImage? _image;
   bool _isLoading = true;
