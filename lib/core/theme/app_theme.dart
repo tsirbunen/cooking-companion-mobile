@@ -53,6 +53,8 @@ class AppTheme {
         onTertiary: dark,
         onTertiaryFixed: extremelyPale,
         tertiaryFixedDim: veryPale,
+        onPrimary: medium,
+        onSecondary: slightlyDark,
       ),
     );
   }

@@ -8,7 +8,7 @@ import 'package:mobile/features/recipes/presentation/search_recipes/recipe_displ
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_title/recipe_titles_list.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/display/recipe_display_mode_enum.dart';
 import 'package:mobile/widgets/app_bar/app_bar_customized.dart';
-import 'package:mobile/widgets/bottom_modal_sheet/bottom_modal_sheet.dart';
+import 'package:mobile/widgets/modal_sheets/bottom_modal_sheet.dart';
 
 const floatingActionsMargin = 15.0;
 

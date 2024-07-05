@@ -64,34 +64,6 @@ class IngredientGroup extends ConsumerWidget {
         )
       ]),
     );
-    // return Table(
-    //   defaultVerticalAlignment: TableCellVerticalAlignment.top,
-    //   columnWidths: _getColumnWidths(isCooking),
-    //   children: group.ingredients.map(
-    //     (ingredient) {
-    //       final isAdded = addedIngredients.contains(ingredient.id);
-    //       final toggleIsAdded = ref.read(provider.notifier).toggleIngredient;
-
-    //       return TableRow(
-    //         children: [
-    //           if (isCooking)
-    //             TableCellPadded(
-    //               widget: Padding(
-    //                 padding: const EdgeInsets.only(right: cellPadding),
-    //                 child: CheckboxCustomizable(
-    //                   isSelected: isAdded,
-    //                   toggle: () => toggleIsAdded(ingredient.id),
-    //                 ),
-    //               ),
-    //             ),
-    //           TableCellPadded(text: ingredient.amount?.toString() ?? ''),
-    //           TableCellPadded(text: ingredient.unit ?? ''),
-    //           TableCellPadded(text: ingredient.name),
-    //         ],
-    //       );
-    //     },
-    //   ).toList(),
-    // );
   }
 
   Map<int, TableColumnWidth> _getColumnWidths(bool isCooking) {

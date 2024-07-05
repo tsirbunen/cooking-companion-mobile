@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/features/recipes/presentation/cook_recipes/cook_single_recipe/cook_single_recipe.dart';
 import 'package:mobile/features/recipes/presentation/cook_recipes/page/cook_page.dart';
+import 'package:mobile/layers/presentation/wizard/page/wizard_page.dart';
 import 'package:mobile/features/users/presentation/home_page.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/page/search_page.dart';
 import 'package:mobile/features/users/presentation/settings_page.dart';
 import 'package:mobile/features/users/presentation/shopping_page.dart';
-import 'package:mobile/features/users/presentation/wizard_page.dart';
 
 // Note: We want to use type-safe routes, and for that, go_router supports using routes
 // generated with the go_router_builder package (that uses build_runner under the hood).

@@ -4,7 +4,13 @@ import 'package:mobile/widgets/drawer/drawer_customized.dart';
 
 class PageBase extends StatelessWidget {
   final Widget pageBody;
-  const PageBase({super.key, required this.pageBody});
+  final bool isDarkBackground;
+
+  const PageBase({
+    super.key,
+    required this.pageBody,
+    this.isDarkBackground = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,7 @@ class PageBase extends StatelessWidget {
     return Scaffold(
         appBar: const AppBarCustomized(hideContent: false),
         drawer: const DrawerCustomized(),
-        backgroundColor: colors.surface,
+        backgroundColor: isDarkBackground ? colors.primary : colors.surface,
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) {
             return SingleChildScrollView(
