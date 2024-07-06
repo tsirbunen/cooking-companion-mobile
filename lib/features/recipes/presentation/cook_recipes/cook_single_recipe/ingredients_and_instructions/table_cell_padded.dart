@@ -21,7 +21,7 @@ class TableCellPadded extends StatelessWidget {
 
     return TableCell(
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 5.0),
+        padding: const EdgeInsets.only(bottom: 7.0),
         child: text != null ? Text(text!, style: style) : widget,
       ),
     );

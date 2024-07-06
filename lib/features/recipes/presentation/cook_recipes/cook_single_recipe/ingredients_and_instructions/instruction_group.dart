@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile/features/recipes/application/cooking_recipe_provider/cooking_single_recipe_provider.dart';
@@ -11,6 +12,9 @@ const double checkboxPadding = 10.0;
 const double rowSpacing = 10.0;
 const double amountCellWidth = 60.0;
 const double unitCellWidth = 70.0;
+const double numberContainerBorderRadius = 5.0;
+const double numberContainerWidth = 25.0;
+const double numberContainerTopPadding = 3.0;
 
 class InstructionGroup extends ConsumerWidget {
   final models.InstructionGroup group;
@@ -39,25 +43,37 @@ class InstructionGroup extends ConsumerWidget {
           Table(
             defaultVerticalAlignment: TableCellVerticalAlignment.top,
             columnWidths: _getColumnWidths(isCooking),
-            children: group.instructions.map(
-              (instruction) {
+            children: group.instructions.mapIndexed(
+              (index, instruction) {
                 final isDone = instructionsDone.contains(instruction.id);
                 final toggleIsDone =
                     ref.read(provider.notifier).toggleInstruction;
 
                 return TableRow(
                   children: [
-                    if (isCooking)
-                      TableCellPadded(
-                        widget: Padding(
-                          padding:
-                              const EdgeInsets.only(right: checkboxPadding),
-                          child: CheckboxCustomizable(
-                            isSelected: isDone,
-                            toggle: () => toggleIsDone(instruction.id),
-                          ),
-                        ),
+                    TableCellPadded(
+                      widget: Padding(
+                        padding: const EdgeInsets.only(right: checkboxPadding),
+                        child: isCooking
+                            ? CheckboxCustomizable(
+                                isSelected: isDone,
+                                toggle: () => toggleIsDone(instruction.id),
+                              )
+                            : Container(
+                                margin: const EdgeInsets.only(
+                                    top: numberContainerTopPadding),
+                                width: numberContainerWidth,
+                                decoration:
+                                    _getNumberContainerDecoration(themeData),
+                                child: Center(
+                                  child: Text(
+                                    (index + 1).toString(),
+                                    style: _getNumberTextStyle(themeData),
+                                  ),
+                                ),
+                              ),
                       ),
+                    ),
                     TableCellPadded(
                       text: instruction.content,
                       fontWeight: FontWeight.normal,
@@ -74,9 +90,23 @@ class InstructionGroup extends ConsumerWidget {
 
   Map<int, TableColumnWidth> _getColumnWidths(bool isCooking) {
     List<TableColumnWidth> columnWidths = [];
-    if (isCooking) columnWidths.add(const IntrinsicColumnWidth());
+    columnWidths.add(const IntrinsicColumnWidth());
     columnWidths.add(const FlexColumnWidth());
 
     return columnWidths.asMap();
+  }
+
+  BoxDecoration _getNumberContainerDecoration(ThemeData themeData) {
+    return BoxDecoration(
+      color: themeData.colorScheme.onPrimary,
+      borderRadius: BorderRadius.circular(numberContainerBorderRadius),
+    );
+  }
+
+  TextStyle _getNumberTextStyle(ThemeData themeData) {
+    return TextStyle(
+      color: themeData.colorScheme.onTertiaryFixed,
+      fontWeight: FontWeight.bold,
+    );
   }
 }

@@ -7,8 +7,7 @@ import 'package:mobile/features/recipes/presentation/cook_recipes/cook_single_re
 import 'package:mobile/features/recipes/presentation/cook_recipes/cook_single_recipe/title_photo_and_tag_widgets/photos.dart';
 import 'package:mobile/features/recipes/presentation/cook_recipes/cook_single_recipe/title_photo_and_tag_widgets/title_and_tags.dart';
 
-const double topTransparentContainerHeight =
-    photoHeight - titleContainerBorderRadius;
+double topTransparentContainerHeight = photoHeight - titleContainerBorderRadius;
 const double bottomSpacing = 80;
 const String ingredientsTitle = 'INGREDIENTS';
 const String instructionsTitle = 'INSTRUCTIONS';

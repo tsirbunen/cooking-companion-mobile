@@ -45,12 +45,6 @@ class TitleAndTags extends StatelessWidget {
         topLeft: Radius.circular(titleContainerBorderRadius),
         topRight: Radius.circular(titleContainerBorderRadius),
       ),
-      // Note: This "unnecessary" border helps to hide the extremely fine line that
-      // appears between the title and the tags for some reason.
-      border: Border.all(
-        color: themeData.colorScheme.surface,
-        width: 1.0,
-      ),
     );
   }
 }

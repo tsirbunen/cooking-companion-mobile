@@ -36,6 +36,15 @@ In the tests as little as possible has been mocked (meaning that currently only 
 - **TEST MOCKING:** For test mocking, the **[mockito](https://pub.dev/packages/mockito)** package was selected.
 - **LOGGING:** For advanced logging, the **[Talker](https://pub.dev/packages/talker)** package was selected (along with **[talker_flutter](https://github.com/Frezyx/talker/tree/master/packages/talker_flutter)** and **[talker_riverpod_logger](https://github.com/Frezyx/talker/tree/master/packages/talker_riverpod_logger)**). For logging GraphQL queries and inspired by **[http_interceptor](https://pub.dev/packages/http_interceptor)**, a custom "interceptor" was created. The **Talker** was wrapped with a custom Logger to enable possible later switch to another logger and to customize the log.
 
+### Deployment
+
+Build the app with
+
+`flutter build web`
+`flutter build web --web-renderer html`
+
+Drag the directory **/build/web/** to Netlify.
+
 ### Directory structure
 
 The overall structure of the project files is presented in the diagram below:
