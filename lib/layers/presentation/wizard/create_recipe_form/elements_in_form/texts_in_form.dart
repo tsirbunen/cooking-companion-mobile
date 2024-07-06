@@ -1,7 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/core/logger/logger.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_bloc.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_event.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_state.dart';
@@ -57,7 +56,6 @@ class TextsInForm extends StatelessWidget {
             Wrap(
               alignment: WrapAlignment.start,
               children: stateValues.mapIndexed((index, value) {
-                logger.warning(value.content, runtimeType);
                 return FormInputSheetWrapper(
                   sheetTitle: subtitle,
                   inputItems: _getInputItems(

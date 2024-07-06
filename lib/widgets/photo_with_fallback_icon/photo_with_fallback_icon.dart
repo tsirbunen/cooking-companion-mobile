@@ -17,12 +17,17 @@ class _PhotoWithFallbackIconState extends State<PhotoWithFallbackIcon>
     with SingleTickerProviderStateMixin {
   NetworkImage? _image;
   bool _isLoading = true;
-  late final AnimationController _controller;
+  AnimationController? _controller;
   Animation<double>? _fadeInOpacityAnimation;
 
   @override
   Widget build(BuildContext context) {
-    if (widget.photo == null) return NoImageIconPlaceholder(size: widget.size);
+    if (widget.photo == null) {
+      return NoImageIconPlaceholder(
+        size: widget.size,
+        isAnimated: true,
+      );
+    }
 
     // Note: While loading the recipe image from the internet,
     // we show an icon as a placeholder and once the image data
@@ -61,7 +66,7 @@ class _PhotoWithFallbackIconState extends State<PhotoWithFallbackIcon>
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (_controller != null) _controller!.dispose();
     // FIXME: HOW TO DISPOSE OF THE LISTENER?
     super.dispose();
   }
@@ -74,20 +79,22 @@ class _PhotoWithFallbackIconState extends State<PhotoWithFallbackIcon>
     );
 
     _fadeInOpacityAnimation = CurvedAnimation(
-      parent: _controller,
+      parent: _controller!,
       curve: Curves.fastOutSlowIn,
       reverseCurve: Curves.easeOutQuad,
     );
   }
 
   void _animateImageFadeInOnImageUploadCompleted() {
+    if (_controller == null) return;
+
     final listener = ImageStreamListener((ImageInfo info, bool syncCall) {
       if (mounted == false) return;
       setState(() {
         _isLoading = false;
       });
 
-      _controller.forward();
+      _controller!.forward();
     });
 
     _image = NetworkImage(widget.photo!.url);

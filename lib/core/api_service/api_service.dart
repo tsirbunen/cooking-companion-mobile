@@ -9,18 +9,25 @@ const apiUrl = 'https://cookbook-dusky.vercel.app/api/graphql';
 const apiErrorLabel = 'Api error:';
 const defaultException = 'Oops! Some error occurred...';
 
-// Note: We will not make this class a singleton. Instead, we use the
-// api service trough a riverpod provider.
+// Note: Make this class a singleton!
 class ApiService {
   late HttpLink _httpLink;
   late GraphQLClient _graphQLClient;
+  bool _isInitialized = false;
+
+  static ApiService? _instance;
+  ApiService._();
+
+  factory ApiService() {
+    _instance ??= ApiService._();
+    return _instance!;
+  }
 
   // Note: The optional client parameter is allowed here so that a mock client
   // can be injected during testing.
-  ApiService initialize({
-    GraphQLClient? client,
-    bool withQueryInterceptor = false,
-  }) {
+  initialize({GraphQLClient? client, bool withQueryInterceptor = false}) {
+    if (_isInitialized) return;
+
     _httpLink = HttpLink(apiUrl);
     _graphQLClient = client ??
         GraphQLClient(
@@ -29,7 +36,8 @@ class ApiService {
               : _httpLink,
           cache: GraphQLCache(),
         );
-    return this;
+
+    _isInitialized = true;
   }
 
   Future<Either<Failure, Map<String, dynamic>>> performQuery(
@@ -37,6 +45,26 @@ class ApiService {
     try {
       final QueryOptions options = QueryOptions(document: gql(query));
       final QueryResult response = await _graphQLClient.query(options);
+
+      if (response.hasException || response.data == null) {
+        final exception = response.exception;
+        return Either.failure(Failure('$apiErrorLabel $exception'));
+      }
+
+      return Either.value(response.data!);
+    } catch (exception) {
+      return Either.failure(Failure('$apiErrorLabel $exception'));
+    }
+  }
+
+  Future<Either<Failure, Map<String, dynamic>>> performMutation(
+      String query, Map<String, dynamic> variables) async {
+    try {
+      final MutationOptions options = MutationOptions(
+        document: gql(query),
+        variables: variables,
+      );
+      final QueryResult response = await _graphQLClient.mutate(options);
 
       if (response.hasException || response.data == null) {
         final exception = response.exception;

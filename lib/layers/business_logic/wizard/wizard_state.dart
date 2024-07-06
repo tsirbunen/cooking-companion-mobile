@@ -3,15 +3,19 @@ import 'package:mobile/layers/business_logic/wizard/utils.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_event.dart';
 
 class WizardState extends Equatable {
+  final int? id;
   final String? title;
   final bool? ovenNeeded;
   final String? description;
+  // FIXME: Add id fields also to these!!!
   final String? language;
   final List<TagElement>? tags;
   final List<IngredientElement>? ingredients;
   final List<InstructionElement>? instructions;
+  final bool isSubmitting;
 
   const WizardState({
+    this.id,
     this.title,
     this.ovenNeeded,
     this.description,
@@ -19,9 +23,11 @@ class WizardState extends Equatable {
     this.tags,
     this.ingredients,
     this.instructions,
+    this.isSubmitting = false,
   });
 
   WizardState copyWith({
+    int? newId,
     String? newTitle,
     bool? newOvenNeeded,
     String? newDescription,
@@ -29,8 +35,10 @@ class WizardState extends Equatable {
     List<TagElement>? newTags,
     List<IngredientElement>? newIngredients,
     List<InstructionElement>? newInstructions,
+    bool? newIsSubmitting,
   }) {
     return WizardState(
+      id: newId ?? id,
       title: newTitle ?? title,
       ovenNeeded: newOvenNeeded ?? ovenNeeded,
       description: newDescription ?? description,
@@ -38,6 +46,7 @@ class WizardState extends Equatable {
       tags: newTags ?? tags,
       ingredients: newIngredients ?? ingredients,
       instructions: newInstructions ?? instructions,
+      isSubmitting: newIsSubmitting ?? isSubmitting,
     );
   }
 
@@ -54,6 +63,7 @@ class WizardState extends Equatable {
     int? instructionIndex,
   }) {
     return WizardState(
+      id: id,
       title: clearTitle != null && clearTitle ? null : title,
       ovenNeeded:
           clearOvenNeeded != null && clearOvenNeeded ? null : ovenNeeded,
@@ -72,11 +82,13 @@ class WizardState extends Equatable {
           ? instructions!.removeAt(instructionIndex!)
               as List<InstructionElement>
           : instructions,
+      isSubmitting: isSubmitting,
     );
   }
 
   @override
   List<Object?> get props => [
+        id,
         title,
         ovenNeeded,
         description,
@@ -84,5 +96,6 @@ class WizardState extends Equatable {
         tags,
         ingredients,
         instructions,
+        isSubmitting,
       ];
 }

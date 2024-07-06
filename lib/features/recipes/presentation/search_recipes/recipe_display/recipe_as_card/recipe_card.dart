@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/logger/logger.dart';
 import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/features/recipes/presentation/search_recipes/recipe_display/recipe_as_card/constants.dart';
 import 'package:mobile/widgets/photo_with_fallback_icon/photo_with_fallback_icon.dart';
@@ -24,6 +25,9 @@ class RecipeCard extends StatelessWidget {
       BoxConstraints constraints,
     ) {
       final dimensions = _getCardDimensions(constraints);
+      final photo = recipe.photos != null && recipe.photos!.isNotEmpty
+          ? recipe.photos![0]
+          : null;
 
       return Card(
         clipBehavior: Clip.hardEdge,
@@ -39,7 +43,7 @@ class RecipeCard extends StatelessWidget {
             child: Column(
               children: [
                 PhotoWithFallbackIcon(
-                  photo: recipe.photos?[0],
+                  photo: photo,
                   size: Size(dimensions.width, dimensions.imageHeight),
                 ),
                 TitleInCard(

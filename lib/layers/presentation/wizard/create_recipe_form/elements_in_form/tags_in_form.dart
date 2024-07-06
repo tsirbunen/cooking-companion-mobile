@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_event.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_state.dart';
-import 'package:mobile/layers/presentation/wizard/create_recipe_form/form_widgets/texts_in_form.dart';
+import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in_form/texts_in_form.dart';
 import 'package:mobile/widgets/tag_with_hashtag/tag_with_hashtag.dart';
 
 const String tagsSubtitle = 'TAGS';

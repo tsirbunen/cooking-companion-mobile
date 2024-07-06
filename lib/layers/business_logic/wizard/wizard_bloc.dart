@@ -1,10 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile/core/logger/logger.dart';
+import 'package:mobile/features/recipes/domain/models/recipe/recipe.dart';
 import 'package:mobile/layers/business_logic/wizard/utils.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_event.dart';
 import 'package:mobile/layers/business_logic/wizard/wizard_state.dart';
+import 'package:mobile/layers/repository/recipe_repository.dart';
 
 class WizardBloc extends Bloc<WizardEvent, WizardState> {
-  WizardBloc() : super(const WizardState()) {
+  final RecipeRepository _recipeRepository;
+  WizardBloc(this._recipeRepository) : super(const WizardState()) {
     on<WizardEvent>(_onEvent);
   }
 
@@ -17,9 +21,30 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
       final InstructionChangedEvent e => _onInstructionChangedEvent(e, emit),
       final TagChangedEvent e => _onTagChangedEvent(e, emit),
       final LanguageChangedEvent e => _onLanguageChangedEvent(e, emit),
-      // final PhotoChangedEvent e => _onPhotoChangedEvent(e, emit),
+      final SubmitRecipeEvent e => _onSubmitRecipeEvent(e, emit),
       final WizardEvent _ => emit(state),
     };
+  }
+
+  Future<void> _onSubmitRecipeEvent(
+    SubmitRecipeEvent event,
+    Emitter<WizardState> emit,
+  ) async {
+    final isCreate = state.id == null;
+    logger.info('isCreate: $isCreate', runtimeType);
+    // FIXME: Implement update recipe!
+    if (!isCreate) return;
+
+    final input = getCreateRecipeInput(state);
+    if (input == null) return;
+
+    emit(state.copyWith(newIsSubmitting: true));
+
+    final Recipe? createdRecipe = await _recipeRepository.createRecipe(input);
+    emit(state.copyWith(
+      newIsSubmitting: false,
+      newId: createdRecipe?.id,
+    ));
   }
 
   Future<void> _onTitleChangedEvent(
@@ -63,12 +88,9 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
     Emitter<WizardState> emit,
   ) async {
     List<TagElement> tags = state.tags != null ? [...state.tags!] : [];
-
-    final shouldNeglect = shouldNeglectEvent(event, tags);
-    if (shouldNeglect) return;
+    if (shouldNeglectEvent(event, tags)) return;
 
     final updatedTags = updateList<TagElement>(event, tags);
-
     emit(state.copyWith(newTags: updatedTags));
   }
 
@@ -85,9 +107,7 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
   ) async {
     List<IngredientElement> ingredients =
         state.ingredients != null ? [...state.ingredients!] : [];
-
-    final shouldNeglect = shouldNeglectEvent(event, ingredients);
-    if (shouldNeglect) return;
+    if (shouldNeglectEvent(event, ingredients)) return;
 
     final updatedIngredients = updateList(event, ingredients);
     emit(state.copyWith(newIngredients: updatedIngredients));
@@ -99,16 +119,9 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
   ) async {
     List<InstructionElement> instructions =
         state.instructions != null ? [...state.instructions!] : [];
-
-    final shouldNeglect = shouldNeglectEvent(event, instructions);
-    if (shouldNeglect) return;
+    if (shouldNeglectEvent(event, instructions)) return;
 
     final updatedInstructions = updateList(event, instructions);
     emit(state.copyWith(newInstructions: updatedInstructions));
   }
-
-  // Future<void> _onPhotoChangedEvent(
-  //     PhotoChangedEvent event, Emitter<WizardState> emit) async {
-  //   emit(state);
-  // }
 }

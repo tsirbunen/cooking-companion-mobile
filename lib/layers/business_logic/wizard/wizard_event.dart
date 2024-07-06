@@ -1,5 +1,7 @@
 class WizardEvent {}
 
+class SubmitRecipeEvent extends WizardEvent {}
+
 abstract class WizardListEvent<T> {
   final int index;
   WizardListEvent({required this.index});

@@ -10,6 +10,7 @@ final apiServiceProvider = Provider<ApiService>((ref) {
 });
 
 Future<Override> getApiServiceProviderOverride() async {
-  final apiService = ApiService().initialize(withQueryInterceptor: true);
+  final apiService = ApiService();
+  apiService.initialize(withQueryInterceptor: true);
   return apiServiceProvider.overrideWithValue(apiService);
 }

@@ -7,6 +7,8 @@ import 'package:mobile/core/logger/provider_logger_logger.dart';
 import 'package:mobile/core/theme/app_status_bar_color.dart';
 import 'package:mobile/widgets/launch/launch_widget.dart';
 
+// NOTE: While transitioning away from Riverpod to Flutter Bloc, these two
+// "worlds" live simultaneously in the app.
 void main() async {
   setAppStatusBarColor();
 

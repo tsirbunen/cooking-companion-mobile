@@ -5,6 +5,7 @@ import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in
 import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in_form/instructions_in_form.dart';
 import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in_form/tags_in_form.dart';
 import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in_form/title_in_form.dart';
+import 'package:mobile/layers/presentation/wizard/create_recipe_form/elements_in_form/submit_form_button.dart';
 
 class CreateRecipeForm extends ConsumerStatefulWidget {
   const CreateRecipeForm({super.key});
@@ -28,6 +29,7 @@ class CreateRecipeFormState extends ConsumerState<CreateRecipeForm> {
           TagsInForm(),
           IngredientsInForm(),
           InstructionsInForm(),
+          SubmitFormButton(),
         ],
       ),
     );
