@@ -1,6 +1,6 @@
 ## COOKING COMPANION (MOBILE)
 
-Want to cook something **delicious**? Navigate to the **[COOKING COMPANION]()** !!!
+Want to cook something **delicious**? Navigate to the **[COOKING COMPANION]()** !!! (not publicly available as yet)
 COOKING COMPANION (mobile) is a Flutter GraphQL frontend app built with **[Flutter](https://flutter.dev)**.
 
 For a desktop or tablet version of the app, please see the **[React project](https://github.com/tsirbunen/cookbook)**
@@ -23,19 +23,19 @@ or, for a more verbose output
 
 `flutter test -r expanded`
 
-In the tests as little as possible has been mocked (meaning that currently only the graphQL client has been replaced with a mock in the tests).
+Note that error logs are expected in the test output logs (as also api server error handling is tested)! In the tests as little as possible has been mocked (meaning that currently only the graphQL client that is used by the api service has been replaced with mock implementations in the tests).
 
 ### Packages and technologies
 
 - **IMMUTABLE MODELS:** For the immutable domain entity models the **[freezed](https://pub.dev/packages/freezed)** package was chosen. Freezed classes are annotated with **[freezed_annotation](https://pub.dev/packages/freezed_annotation)** and generated files built with the **[build_runner](https://pub.dev/packages/build_runner)** to produce \*.freezed.dart-files in the same folder as the original annotated class file. When a fromJson factory constructor is defined in a class with the @freezed-annotation, then code for (de)serialization of the freezed model class is generated (\*.g.dart). For this, also the **[json_serializable](https://pub.dev/packages/json_serializable)** with **[json_annotation](https://pub.dev/packages/json_annotation)** is needed.
 - **ROUTING:** **[go_router](https://pub.dev/packages/go_router)** with **[type-safe routes](https://pub.dev/documentation/go_router/latest/topics/Type-safe%20routes-topic.html)** and **[go_router_builder file generation](https://pub.dev/packages/go_router_builder)** were used.
-- **GRAPHQL CLIENT:** For the GraphQL client, the more recent **[Ferry](https://ferrygraphql.com)** was first considered, but it seemed quite "code-generation-heavy" and is based on StreamBuilder and Built value which were not desired. So the "traditional" **[graphql](https://pub.dev/packages/graphql)** was chosen. The GraphQL client connects to the **/api/graphql** of **[the Cookbook companion Next.js web app](https://github.com/tsirbunen/cookbook/)**.
-- **STATE MANAGEMENT:** I started off with the **[riverpod](https://riverpod.dev/docs/introduction/why_riverpod)** package (mainly out of curiosity), but soon ditched it in favor of the Bloc based approach and the **[flutter_bloc](https://pub.dev/packages/flutter_bloc)** package.
-- **OBJECT COMPARISON:** **[equatable](https://pub.dev/packages/equatable/example)**
+- **GRAPHQL CLIENT:** For the GraphQL client, the more recent **[Ferry](https://ferrygraphql.com)** was first considered, but it seemed quite "code-generation-heavy" and is based on StreamBuilder and Built value which were not desired. So the "traditional" **[graphql](https://pub.dev/packages/graphql)** package was chosen. The GraphQL client connects to the **/api/graphql** of **[the Cookbook companion Next.js web app](https://github.com/tsirbunen/cookbook/)**.
+- **STATE MANAGEMENT:** The project was started off with the **[riverpod](https://riverpod.dev/docs/introduction/why_riverpod)** package (mainly out of curiosity), but that was soon ditched in favor of the Bloc based approach and the **[flutter_bloc](https://pub.dev/packages/flutter_bloc)** package.
+- **OBJECT COMPARISON:** To help comparing bloc states the **[equatable](https://pub.dev/packages/equatable/example)** package was selected.
 - **DEPENDENCY INJECTION:** **[get_it](https://pub.dev/packages/get_it)**
 - **TEST MOCKING:** For test mocking, the **[mockito](https://pub.dev/packages/mockito)** package was selected.
-- **BLOC TESTING:** To help in testing bloc functionality, the **[bloc_test](https://pub.dev/packages/bloc_test)** package was selected.
-- **LOGGING:** For advanced logging, the **[Talker](https://pub.dev/packages/talker)** package was selected (along with **[talker_flutter](https://github.com/Frezyx/talker/tree/master/packages/talker_flutter)**). For logging GraphQL queries (with inspiration from **[http_interceptor](https://pub.dev/packages/http_interceptor)**), a custom "query interceptor" was created. The **Talker** was wrapped with a custom Logger to enable possible later switch to another logger and to customize the log.
+- **BLOC TESTING:** To help in testing bloc functionality, the **[bloc_test](https://pub.dev/packages/bloc_test)** package was used.
+- **LOGGING:** For advanced logging, the **[Talker](https://pub.dev/packages/talker)** package was selected (along with **[talker_flutter](https://github.com/Frezyx/talker/tree/master/packages/talker_flutter)**). For logging GraphQL queries (with inspiration from **[http_interceptor](https://pub.dev/packages/http_interceptor)**), a custom "query interceptor" was implemented. The **Talker** was wrapped with a custom Logger to enable possible later switch to another logger and to customize the log.
 
 ### Deployment
 
@@ -48,36 +48,40 @@ Drag the directory **/build/web/** to Netlify.
 
 ### Directory structure
 
-The overall structure of the project files is presented in the diagram below:
+The overall structure of the project is presented below:
 
 ```
 lib/
-  ├── core/
+  ├── app_services/
         ├── api_service/
         ├── app/
-        └── router/
-  ├── features/
-          ├── users/
-          └── recipes/
-  ├── utils/
-          ├── either/
+        ├── blocs/
+        ├── router/
+        ├── logger/
+        └── theme/
+  ├── business_logic/
+          ├── all_recipes_logic/
+          ├── cook_logic/
+          ├── search_logic/
+          ├── wizard_logic/
+          └── models/
+  ├── presentation/
+          ├── pages/
+          └── widgets/
+  ├── repositories_and_data/
           ├── graph_ql/
-          └── failure/
+          ├── models/
+          └── repositories/
   ├── test/
-  ├── widgets/
   └── main.dart
 ```
 
-The directory structure of an example feature is presented below:
+An example of a business logic directory is presented below:
 
 ```
-some_feature/
-      ├── application/
-      ├── domain/
-            ├── models/
-            └── use_cases
-      ├── presentation/
-      └── repository/
-            ├── api_query_handling/
-            └── graph_ql
+cook_logic/
+      ├── cook_bloc.dart
+      ├── cook_event.dart
+      ├── cook_state.dart
+      └── utils.dart
 ```
