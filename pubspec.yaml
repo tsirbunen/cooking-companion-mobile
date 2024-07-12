@@ -40,21 +40,20 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
   graphql: 5.2.0-beta.8
-  flutter_riverpod: ^2.5.1
-  riverpod_annotation: ^2.3.5
   fpdart: 2.0.0-dev.3
   mockito: ^5.4.4
   talker: ^4.2.4
   talker_flutter: ^4.2.4
-  talker_riverpod_logger: ^1.0.4
   collection: ^1.18.0
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   get_it: ^7.7.0
+  bloc_test: ^9.1.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # test: ^1.21.2
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
