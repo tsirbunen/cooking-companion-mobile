@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobile/app_services/blocs/blocs.dart';
 import 'package:mobile/app_services/router/routes.dart';
 import 'package:mobile/presentation/pages/cook/page_widgets/recipe_and_actions/cook_content.dart';
-import 'package:mobile/presentation/pages/cook/page_widgets/recipe_and_actions/cook_recipe_floating_actions.dart';
+import 'package:mobile/presentation/pages/cook/page_widgets/recipe_and_actions/cook_recipe_floating_action_buttons.dart';
 import 'package:mobile/presentation/pages/cook/page_widgets/title_photo_and_tag_widgets/photos.dart';
 import 'package:mobile/business_logic/cook_logic/cook_bloc.dart';
 import 'package:mobile/business_logic/models/side/side_enum.dart';
@@ -56,7 +56,7 @@ class _CookRecipePageState extends State<CookRecipePage> {
         ),
       ),
       floatingWidget: _animationsDone
-          ? CookRecipeFloatingActions(recipeId: widget.recipeId)
+          ? CookRecipeFloatingActionButtons(recipeId: widget.recipeId)
           : null,
     );
   }

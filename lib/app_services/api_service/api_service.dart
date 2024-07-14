@@ -43,6 +43,8 @@ class ApiService {
     _isInitialized = true;
   }
 
+  // FIXME: Figure out why query interceptor logs only the first time a query
+  // is made but logs every time a mutation is made.
   Future<Either<Failure, Map<String, dynamic>>> performQuery(
       String query) async {
     try {

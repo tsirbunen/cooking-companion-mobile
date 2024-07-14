@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/app_services/blocs/blocs.dart';
+import 'package:mobile/app_services/router/route_enum.dart';
+import 'package:mobile/app_services/router/route_enum_path_extension.dart';
 import 'package:mobile/business_logic/cook_logic/cook_bloc.dart';
 import 'package:mobile/business_logic/cook_logic/cook_event.dart';
+import 'package:mobile/business_logic/wizard_logic/wizard_bloc.dart';
+import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/animated_floating_actions.dart';
 
@@ -9,10 +14,10 @@ const floatingActionsMargin = 15.0;
 const cookLabel = 'cook';
 const editLabel = 'edit';
 
-class CookRecipeFloatingActions extends StatelessWidget {
+class CookRecipeFloatingActionButtons extends StatelessWidget {
   final int recipeId;
 
-  const CookRecipeFloatingActions({super.key, required this.recipeId});
+  const CookRecipeFloatingActionButtons({super.key, required this.recipeId});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +29,7 @@ class CookRecipeFloatingActions extends StatelessWidget {
           ActionConfig(
             label: editLabel,
             iconData: Icons.edit_note,
-            onPressed: () => {},
+            onPressed: _editRecipe(context),
           ),
           ActionConfig(
             label: cookLabel,
@@ -39,7 +44,15 @@ class CookRecipeFloatingActions extends StatelessWidget {
   void Function() _toggleCookRecipe() {
     return () {
       final cookBloc = getIt.get<CookBloc>();
-      return cookBloc.add(ToggleCookRecipeEvent(recipeId));
+      cookBloc.add(ToggleCookRecipeEvent(recipeId));
+    };
+  }
+
+  void Function() _editRecipe(BuildContext context) {
+    return () {
+      final wizardBloc = getIt.get<WizardBloc>();
+      wizardBloc.add(EditRecipeEvent(recipeId: recipeId));
+      context.go(RouteEnum.wizard.path());
     };
   }
 }

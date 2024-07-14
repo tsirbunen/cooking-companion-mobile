@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_bloc.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_input_sheet/form_input_sheet_item_model.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_input_sheet/form_input_sheet_wrapper.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/sub_title_in_form.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/form_input_sheet_item_model.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/form_input_sheet_wrapper.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/sub_title_in_form.dart';
 
 const double borderRadius = 10.0;
 const String amountLabel = 'AMOUNT';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/no_content_yet.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/no_content_yet.dart';
 
 const double itemSpacing = 10.0;
 const double iconSize = 35.0;

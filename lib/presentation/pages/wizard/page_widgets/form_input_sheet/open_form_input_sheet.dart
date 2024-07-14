@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_input_sheet/form_input_sheet_buttons.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/sub_title_in_form.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/form_input_sheet_buttons.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/sub_title_in_form.dart';
 import 'package:mobile/presentation/widgets/modal_sheets/show_top_modal_sheet.dart';
 
 const double sheetMargin = 20.0;

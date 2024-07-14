@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mobile/app_services/logger/logger.dart';
+import 'package:mobile/business_logic/models/bloc_status/bloc_status.dart';
 import 'package:mobile/business_logic/models/recipe/recipe.dart';
 import 'package:mobile/business_logic/wizard_logic/utils.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
@@ -7,6 +7,8 @@ import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
 import 'package:mobile/repositories_and_data/repositories/recipe_repository.dart';
 import 'package:mobile/repositories_and_data/models/either/either.dart';
 import 'package:mobile/repositories_and_data/models/failure/failure.dart';
+
+const String someDataIsMissing = 'Some data is missing!';
 
 class WizardBloc extends Bloc<WizardEvent, WizardState> {
   final RecipeRepository _recipeRepository;
@@ -16,6 +18,7 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
 
   Future<void> _onEvent(WizardEvent event, Emitter<WizardState> emit) async {
     return switch (event) {
+      final EditRecipeEvent e => _onEditRecipeEvent(e, emit),
       final TitleChangedEvent e => _onTitleChangedEvent(e, emit),
       final OvenNeededChangedEvent e => _onOvenNeededChangedEvent(e, emit),
       final DescriptionChangedEvent e => _onDescriptionChangedEvent(e, emit),
@@ -24,8 +27,41 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
       final TagChangedEvent e => _onTagChangedEvent(e, emit),
       final LanguageChangedEvent e => _onLanguageChangedEvent(e, emit),
       final SubmitRecipeEvent e => _onSubmitRecipeEvent(e, emit),
+      final ClearFormEvent e => _onClearFormEvent(e, emit),
+      final ResetFormEvent e => _onResetFormEvent(e, emit),
       final WizardEvent _ => emit(state),
     };
+  }
+
+  Future<void> _onResetFormEvent(
+    ResetFormEvent event,
+    Emitter<WizardState> emit,
+  ) async {
+    if (state.originalRecipe == null) return;
+    final newStateWithExistingRecipe =
+        state.copyWithRecipe(state.originalRecipe!);
+    if (newStateWithExistingRecipe == null) return;
+    emit(newStateWithExistingRecipe);
+  }
+
+  Future<void> _onClearFormEvent(
+    ClearFormEvent event,
+    Emitter<WizardState> emit,
+  ) async {
+    emit(const WizardState());
+  }
+
+  Future<void> _onEditRecipeEvent(
+    EditRecipeEvent event,
+    Emitter<WizardState> emit,
+  ) async {
+    final recipeId = event.recipeId;
+    final recipe = _recipeRepository.getRecipeById(recipeId);
+    if (recipe == null) return;
+
+    final newStateWithExistingRecipe = state.copyWithRecipe(recipe);
+    if (newStateWithExistingRecipe == null) return;
+    emit(newStateWithExistingRecipe);
   }
 
   Future<void> _onSubmitRecipeEvent(
@@ -33,25 +69,48 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
     Emitter<WizardState> emit,
   ) async {
     final isCreate = state.id == null;
-    logger.info('isCreate: $isCreate', runtimeType);
-    // FIXME: Implement update recipe!
-    if (!isCreate) return;
 
-    final input = getCreateRecipeInput(state);
-    if (input == null) return;
+    emit(state.copyWith(newStatus: BlocStatus.submitting));
 
-    emit(state.copyWith(newIsSubmitting: true));
-
-    final Either<Failure, Recipe> result =
-        await _recipeRepository.createRecipe(input);
+    final Either<Failure, Recipe> result = isCreate
+        ? await _handleSubmitCreateRecipe()
+        : await _handleSubmitPatchRecipe();
 
     result.match(
-      (data) => emit(state.copyWith(
-        newIsSubmitting: false,
-        newId: data!.id,
-      )),
-      (failure) => {},
+      (data) => emit(
+        state.copyWith(
+          newStatus:
+              isCreate ? BlocStatus.recipeCreated : BlocStatus.recipePatched,
+          newId: data!.id,
+        ),
+      ),
+      (failure) => emit(
+        // FIXME: Handle showing error message to user
+        state.copyWith(
+          newStatus: BlocStatus.ok,
+        ),
+      ),
     );
+  }
+
+  Future<Either<Failure, Recipe>> _handleSubmitCreateRecipe() async {
+    final input = getCreateRecipeInput(state);
+    if (input == null) {
+      return Either.failure(const Failure(someDataIsMissing));
+    }
+    final Either<Failure, Recipe> result =
+        await _recipeRepository.createRecipe(input);
+    return result;
+  }
+
+  Future<Either<Failure, Recipe>> _handleSubmitPatchRecipe() async {
+    final input = getPatchRecipeInput(state);
+    if (input == null) {
+      return Either.failure(const Failure(someDataIsMissing));
+    }
+    final Either<Failure, Recipe> result =
+        await _recipeRepository.patchRecipe(input);
+    return result;
   }
 
   Future<void> _onTitleChangedEvent(

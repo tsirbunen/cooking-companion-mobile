@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/add_new_item_button.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_input_sheet/form_input_sheet_item_model.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_input_sheet/open_form_input_sheet.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/text_input_form_field.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/add_new_item_button.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/form_input_sheet_item_model.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/open_form_input_sheet.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/text_input_form_field.dart';
 
 const double itemSpacing = 10.0;
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/app_services/blocs/blocs.dart';
+import 'package:mobile/app_services/logger/logger.dart';
 import 'package:mobile/business_logic/all_recipes_logic/all_recipes_bloc.dart';
 import 'package:mobile/business_logic/all_recipes_logic/all_recipes_event.dart';
 import 'package:mobile/business_logic/all_recipes_logic/all_recipes_state.dart';
@@ -21,6 +22,7 @@ class _SearchPageState extends State<SearchPage> {
   void initState() {
     super.initState();
     getIt.get<AllRecipesBloc>().add(FetchAllRecipesEvent());
+    logger.warning('SEARCH PAGE initstate', runtimeType);
   }
 
   @override

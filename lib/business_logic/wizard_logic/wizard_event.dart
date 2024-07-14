@@ -1,6 +1,15 @@
 class WizardEvent {}
 
+class EditRecipeEvent extends WizardEvent {
+  final int recipeId;
+  EditRecipeEvent({required this.recipeId});
+}
+
 class SubmitRecipeEvent extends WizardEvent {}
+
+class ClearFormEvent extends WizardEvent {}
+
+class ResetFormEvent extends WizardEvent {}
 
 abstract class WizardListEvent<T> {
   final int index;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form_widgets/text_in_container.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/elements_in_form/texts_in_form.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/text_in_container.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/elements_in_form/texts_in_form.dart';
 
 const double borderRadius = 10.0;
 const String instructionsSubtitle = 'INSTRUCTIONS';

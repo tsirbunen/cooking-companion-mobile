@@ -6,6 +6,9 @@ import 'package:mobile/app_services/router/route_enum.dart';
 import 'package:mobile/app_services/router/route_enum_go_route_extension.dart';
 import 'package:mobile/app_services/router/route_enum_path_extension.dart';
 import 'package:mobile/app_services/router/routes.dart';
+import 'package:mobile/business_logic/search_logic/search_bloc.dart';
+import 'package:mobile/business_logic/wizard_logic/wizard_bloc.dart';
+import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/presentation/pages/cook/page/cook_recipe_page.dart';
 import 'package:mobile/business_logic/cook_logic/cook_bloc.dart';
 import 'package:talker_flutter/talker_flutter.dart';
@@ -22,6 +25,16 @@ class RouterController {
       final int? recipeId = cookBloc.getFocusRecipeId();
       if (recipeId != null) {
         return '/$cookRecipePathRoot/$recipeId';
+      }
+    }
+
+    if (state.matchedLocation == RouteEnum.wizard.path()) {
+      final searchBloc = getIt.get<SearchBloc>();
+      final pickedRecipes = searchBloc.getPickedRecipes();
+      if (pickedRecipes.length == 1) {
+        final wizardBloc = getIt.get<WizardBloc>();
+        wizardBloc.add(EditRecipeEvent(recipeId: pickedRecipes[0].id));
+        return RouteEnum.wizard.path();
       }
     }
 

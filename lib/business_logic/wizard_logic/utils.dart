@@ -1,9 +1,14 @@
+import 'package:mobile/business_logic/models/ingredient_group/ingredient_group.dart';
+import 'package:mobile/business_logic/models/instruction_group/instruction_group.dart';
+import 'package:mobile/business_logic/models/recipe/recipe.dart';
+import 'package:mobile/business_logic/models/tag/tag.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
 import 'package:mobile/repositories_and_data/models/create_recipe_input/create_recipe_input.dart';
 import 'package:mobile/repositories_and_data/models/ingredient_group_input/ingredient_group_input.dart';
 import 'package:mobile/repositories_and_data/models/ingredient_input/ingredient_input.dart';
 import 'package:mobile/repositories_and_data/models/instruction_group_input/instruction_group_input.dart';
+import 'package:mobile/repositories_and_data/models/patch_recipe_input/patch_recipe_input.dart';
 
 bool shouldNeglectEvent<T>(WizardListEvent event, List<T> list) {
   return event.index < 0 || event.index > list.length;
@@ -42,6 +47,96 @@ CreateRecipeInput? getCreateRecipeInput(WizardState state) {
     title: state.title!,
     language: state.language ?? 'English',
     ovenNeeded: state.ovenNeeded != null ? state.ovenNeeded! : false,
+    description: state.description,
+    tags: state.tags?.map((e) => e.content).toList(),
+    ingredientGroups: [getIngredientGroupInput(state.ingredients!)],
+    instructionGroups: [getInstructionGroupInput(state.instructions!)],
+  );
+}
+
+bool getTagsHaveChanged(List<TagElement>? tags, List<Tag>? originalTags) {
+  final hasTags = tags != null && tags.isNotEmpty;
+  final hasOriginalTags = originalTags != null && originalTags.isNotEmpty;
+  if (!hasTags && !hasOriginalTags) return false;
+  if (!hasTags && hasOriginalTags || hasTags && !hasOriginalTags) return true;
+  if (tags!.length != originalTags!.length) return true;
+
+  final originalTagTags = originalTags.map((e) => e.tag);
+  for (final tag in tags) {
+    if (!originalTagTags.contains(tag.content)) return true;
+  }
+  return false;
+}
+
+bool getIngredientsHaveChanged(
+  List<IngredientElement>? ingredients,
+  List<IngredientGroup>? originalIngredientGroups,
+) {
+  // FIXME: Currently only one ingredient group is supported -> support multiple!
+
+  final hasIngredients = ingredients != null && ingredients.isNotEmpty;
+  final hasOriginalIngredients =
+      originalIngredientGroups != null && originalIngredientGroups.isNotEmpty;
+  if (!hasIngredients && !hasOriginalIngredients) return false;
+  if (!hasIngredients && hasOriginalIngredients ||
+      hasIngredients && !hasOriginalIngredients) return true;
+  if (ingredients!.length != originalIngredientGroups!.length) return true;
+
+  final originalsAsStrings = originalIngredientGroups[0]
+      .ingredients
+      .map((e) => '${e.name} ${e.amount} ${e.unit}');
+  final ingredientsAsStrings =
+      ingredients.map((e) => '${e.content} ${e.amount} ${e.unit}');
+  for (final ingredient in ingredientsAsStrings) {
+    if (!originalsAsStrings.contains(ingredient)) return true;
+  }
+  return false;
+}
+
+bool getInstructionsHaveChanged(
+  List<InstructionElement>? instructions,
+  List<InstructionGroup>? originalInstructionGroups,
+) {
+  // FIXME: Currently only one instruction group is supported -> support multiple!
+  final originalInstructions = originalInstructionGroups?[0].instructions;
+  final hasInstructions = instructions != null && instructions.isNotEmpty;
+  final hasOriginalInstructions =
+      originalInstructions != null && originalInstructions.isNotEmpty;
+  if (!hasInstructions && !hasOriginalInstructions) return false;
+  if (!hasInstructions && hasOriginalInstructions ||
+      hasInstructions && !hasOriginalInstructions) return true;
+  if (instructions!.length != originalInstructions!.length) return true;
+
+  final originalContents = originalInstructions.map((e) => e.content);
+  final contents = instructions.map((e) => e.content);
+  for (final content in contents) {
+    if (!originalContents.contains(content)) return true;
+  }
+  return false;
+}
+
+PatchRecipeInput? getPatchRecipeInput(WizardState state) {
+  final Recipe original = state.originalRecipe!;
+  final fieldsToInclude = [
+    if (state.title != original.title) 'title',
+    if (state.language != original.language.language) 'language',
+    if (state.ovenNeeded != original.ovenNeeded) 'ovenNeeded',
+    if (state.description != original.description) 'description',
+    if (getTagsHaveChanged(state.tags, original.tags)) 'tags',
+    if (getIngredientsHaveChanged(state.ingredients, original.ingredientGroups))
+      'ingredientGroups',
+    if (getInstructionsHaveChanged(
+        state.instructions, original.instructionGroups))
+      'instructionGroups',
+  ];
+  if (fieldsToInclude.isEmpty) return null;
+
+  return PatchRecipeInput(
+    recipeId: state.id!,
+    fieldsToInclude: fieldsToInclude,
+    title: state.title,
+    language: state.language,
+    ovenNeeded: state.ovenNeeded,
     description: state.description,
     tags: state.tags?.map((e) => e.content).toList(),
     ingredientGroups: [getIngredientGroupInput(state.ingredients!)],

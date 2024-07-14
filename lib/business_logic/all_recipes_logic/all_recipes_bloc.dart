@@ -18,6 +18,7 @@ class AllRecipesBloc extends Bloc<AllRecipesEvent, AllRecipesState> {
       AllRecipesEvent event, Emitter<AllRecipesState> emit) async {
     return switch (event) {
       final FetchAllRecipesEvent e => _onFetchAllRecipesEvent(e, emit),
+      final RecipeUpdateEvent e => _onRecipeUpdateEvent(e, emit),
       final AllRecipesEvent _ => emit(state),
     };
   }
@@ -38,5 +39,35 @@ class AllRecipesBloc extends Bloc<AllRecipesEvent, AllRecipesState> {
       )),
       (failure) => emit(state.copyWith(newStatus: BlocStatus.error)),
     );
+  }
+
+  void _onRecipeUpdateEvent(
+    RecipeUpdateEvent event,
+    Emitter<AllRecipesState> emit,
+  ) async {
+    final recipeId = event.recipeId;
+    final recipe = event.recipe;
+    final recipeWasDeleted = recipe == null;
+    if (recipeWasDeleted) {
+      final updatedRecipes =
+          state.recipes.where((r) => r.id != recipeId).toList();
+      emit(state.copyWith(newAllRecipes: updatedRecipes));
+    } else {
+      bool updateDone = false;
+      final updatedRecipes = state.recipes.map((originalRecipe) {
+        bool isCurrentRecipe = originalRecipe.id == recipeId;
+        if (isCurrentRecipe) {
+          updateDone = true;
+          return recipe;
+        }
+        return originalRecipe;
+      }).toList();
+      if (updateDone) {
+        return emit(state.copyWith(newAllRecipes: updatedRecipes));
+      }
+
+      updatedRecipes.add(recipe);
+      emit(state.copyWith(newAllRecipes: updatedRecipes));
+    }
   }
 }

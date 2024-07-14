@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/presentation/pages/wizard/create_recipe_form/form/create_recipe_form.dart';
+import 'package:mobile/presentation/pages/wizard/page_widgets/create_recipe_form/create_recipe_form.dart';
 import 'package:mobile/presentation/widgets/page_base/page_base.dart';
 
 const double padding = 18.0;

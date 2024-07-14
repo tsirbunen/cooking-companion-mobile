@@ -3,4 +3,8 @@ enum BlocStatus {
   ok,
   error,
   submitting,
+  recipeCreated,
+  recipePatched,
 }
+
+// FIXME: Implement possible message!!!
