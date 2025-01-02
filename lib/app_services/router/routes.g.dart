@@ -42,6 +42,10 @@ RouteBase get $homeRoute => GoRouteData.$route(
           path: '/wizard',
           factory: $WizardRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: '/account',
+          factory: $AccountRouteExtension._fromState,
+        ),
       ],
     );
 
@@ -154,6 +158,23 @@ extension $WizardRouteExtension on WizardRoute {
 
   String get location => GoRouteData.$location(
         '/wizard',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AccountRouteExtension on AccountRoute {
+  static AccountRoute _fromState(GoRouterState state) => AccountRoute();
+
+  String get location => GoRouteData.$location(
+        '/account',
       );
 
   void go(BuildContext context) => context.go(location);

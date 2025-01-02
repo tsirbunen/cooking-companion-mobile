@@ -8,4 +8,5 @@ enum RouteEnum {
   wizard,
   shopping,
   settings,
+  account,
 }

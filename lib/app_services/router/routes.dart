@@ -7,6 +7,7 @@ import 'package:mobile/presentation/pages/home/home_page.dart';
 import 'package:mobile/presentation/pages/search/page/search_page.dart';
 import 'package:mobile/presentation/pages/settings/settings_page.dart';
 import 'package:mobile/presentation/pages/shopping/shopping_page.dart';
+import 'package:mobile/presentation/pages/account/account_page.dart';
 
 // Note: We want to use type-safe routes, and for that, go_router supports using routes
 // generated with the go_router_builder package (that uses build_runner under the hood).
@@ -21,6 +22,7 @@ const cookPath = '/cook';
 const settingsPath = '/settings';
 const shoppingPath = '/shopping';
 const wizardPath = '/wizard';
+const accountPath = '/account';
 
 @TypedGoRoute<HomeRoute>(path: HomeRoute.path, routes: [
   TypedGoRoute<HomeRoute>(path: HomeRoute.path),
@@ -30,6 +32,7 @@ const wizardPath = '/wizard';
   TypedGoRoute<SettingsRoute>(path: SettingsRoute.path),
   TypedGoRoute<ShoppingRoute>(path: ShoppingRoute.path),
   TypedGoRoute<WizardRoute>(path: WizardRoute.path),
+  TypedGoRoute<AccountRoute>(path: AccountRoute.path),
 ]) // NOTE: No space here, otherwise the go router builder code generation won't work!
 @immutable
 class HomeRoute extends GoRouteData {
@@ -89,4 +92,12 @@ class WizardRoute extends GoRouteData {
   static const path = wizardPath;
   @override
   Widget build(BuildContext context, GoRouterState state) => const WizardPage();
+}
+
+@immutable
+class AccountRoute extends GoRouteData {
+  static const path = accountPath;
+  @override
+  Widget build(BuildContext context, GoRouterState state) =>
+      const AccountPage();
 }

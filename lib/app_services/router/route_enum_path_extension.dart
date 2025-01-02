@@ -18,6 +18,8 @@ extension PathExtension on RouteEnum {
         return WizardRoute.path;
       case RouteEnum.shopping:
         return ShoppingRoute.path;
+      case RouteEnum.account:
+        return AccountRoute.path;
       default:
         throw Exception('Route path not implemented!');
     }

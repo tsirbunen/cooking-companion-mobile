@@ -38,6 +38,11 @@ extension GoRouteExtension on RouteEnum {
           path: ShoppingRoute.path,
           builder: (context, state) => ShoppingRoute().build(context, state),
         );
+      case RouteEnum.account:
+        return GoRoute(
+          path: AccountRoute.path,
+          builder: (context, state) => AccountRoute().build(context, state),
+        );
       default:
         throw Exception('GoRoute not implemented!');
     }

@@ -7,7 +7,7 @@ For a desktop or tablet version of the app, please see the **[React project](htt
 
 ### Code generation
 
-To build the generated parts of immutable Freezed model classes, the go router routes and test mocks, use the build_runner command (where "--delete-conflicting-outputs" prevents the prompt asking what to do with conflicting pre-existing files):
+To build the generated parts of immutable Freezed model classes, the go router routes, and test mocks, use the build_runner command (where "--delete-conflicting-outputs" prevents the prompt asking what to do with conflicting pre-existing files):
 
 `dart run build_runner build --delete-conflicting-outputs`
 

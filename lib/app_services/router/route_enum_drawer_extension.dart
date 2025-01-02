@@ -9,6 +9,7 @@ extension DrawerExtension on RouteEnum {
         RouteEnum.wizard: Icons.list,
         RouteEnum.shopping: Icons.shopping_cart_outlined,
         RouteEnum.settings: Icons.settings_outlined,
+        RouteEnum.account: Icons.account_circle_outlined,
       }[this]!;
 
   String get label => {
@@ -18,6 +19,7 @@ extension DrawerExtension on RouteEnum {
         RouteEnum.settings: 'Settings',
         RouteEnum.shopping: 'Shopping',
         RouteEnum.wizard: 'Wizard',
+        RouteEnum.account: 'Account',
       }[this]!;
 }
 

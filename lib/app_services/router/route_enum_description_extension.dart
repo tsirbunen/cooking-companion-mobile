@@ -15,6 +15,8 @@ extension DescriptionExtension on RouteEnum {
         return 'Craft your own culinary masterpieces with the recipe creation wizard';
       case RouteEnum.shopping:
         return 'Generate a shopping list based on recipe ingredients';
+      case RouteEnum.account:
+        return 'Sign in or create an account to create and manage your recipes';
       default:
         throw Exception('Route description not implemented!');
     }
