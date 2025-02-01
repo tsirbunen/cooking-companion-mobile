@@ -34,6 +34,11 @@ class CookState {
     );
   }
 
+  String? getTitleForRecipe(int recipeId) {
+    final recipe = recipeMap[recipeId];
+    return recipe?.title;
+  }
+
   // // FIXME: Can equatable figure out custom classes like Recipe?
   // @override
   // List<Object?> get props => [

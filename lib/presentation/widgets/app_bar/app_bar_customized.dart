@@ -33,12 +33,14 @@ class AppBarCustomized extends StatelessWidget implements PreferredSizeWidget {
                       SizedBox(width: 10.0),
                       // Note: There will be other widgets here in the future,
                       // hence the use of a row.
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AppTitleWithRoute(),
-                        ],
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Flexible(child: AppTitleWithRoute()),
+                          ],
+                        ),
                       ),
                     ],
                   ),
