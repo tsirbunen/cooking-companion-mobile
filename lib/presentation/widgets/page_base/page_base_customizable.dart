@@ -7,6 +7,7 @@ class PageBaseCustomizable extends StatelessWidget {
   final bool hideAppBar;
   final Widget? backgroundWidget;
   final Widget? floatingWidget;
+  final ScrollController? scrollController;
 
   const PageBaseCustomizable({
     super.key,
@@ -14,6 +15,7 @@ class PageBaseCustomizable extends StatelessWidget {
     this.hideAppBar = false,
     this.backgroundWidget,
     this.floatingWidget,
+    this.scrollController,
   });
 
   @override
@@ -31,6 +33,7 @@ class PageBaseCustomizable extends StatelessWidget {
             builder:
                 (BuildContext context, BoxConstraints viewportConstraints) {
               return SingleChildScrollView(
+                controller: scrollController,
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     minHeight: viewportConstraints.maxHeight,

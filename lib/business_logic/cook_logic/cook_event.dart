@@ -31,3 +31,13 @@ class ToggleInstructionDoneEvent extends CookEvent {
     required this.instructionId,
   });
 }
+
+class SetRecipeScrollPositionEvent extends CookEvent {
+  final int recipeId;
+  final double position;
+
+  SetRecipeScrollPositionEvent({
+    required this.recipeId,
+    required this.position,
+  });
+}

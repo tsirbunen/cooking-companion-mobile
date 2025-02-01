@@ -8,6 +8,9 @@ import 'package:mobile/repositories/recipes/repositories/recipe_repository.dart'
 
 class CookBloc extends Bloc<CookEvent, CookState> {
   final RecipeRepository _recipeRepository;
+  // FIXME: This bloc should probably not know about the UI scroll positions, but
+  // then again where else should we store this data?
+  final _scrollPositionsByRecipeId = <int, double>{};
 
   CookBloc(this._recipeRepository)
       : super(const CookState(
@@ -29,8 +32,23 @@ class CookBloc extends Bloc<CookEvent, CookState> {
         _onToggleIngredientAddedEvent(e, emit),
       final ToggleInstructionDoneEvent e =>
         _onToggleInstructionDoneEvent(e, emit),
+      final SetRecipeScrollPositionEvent e => _onSetScrollPosition(e, emit),
       final CookEvent _ => emit(state),
     };
+  }
+
+  double getRecipeScrollPosition(int recipeId) {
+    return _scrollPositionsByRecipeId[recipeId] ?? 0.0;
+  }
+
+  void _onSetScrollPosition(
+    SetRecipeScrollPositionEvent event,
+    Emitter<CookState> emit,
+  ) {
+    // Note: We do not want to store the scroll position data in the state
+    // because we never rebuild widgets based on this data. We only query it
+    // when we initialize a page state. Therefore also no need to emit a new state.
+    _scrollPositionsByRecipeId[event.recipeId] = event.position;
   }
 
   void _onToggleIngredientAddedEvent(
