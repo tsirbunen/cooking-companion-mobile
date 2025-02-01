@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/app_services/router/route_enum.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum.dart';
 import 'package:mobile/presentation/widgets/route_description_with_navigation/route_description_with_navigation.dart';
 import 'package:mobile/presentation/widgets/page_base/page_base.dart';
 

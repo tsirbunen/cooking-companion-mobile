@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/app_services/router/route_enum.dart';
-import 'package:mobile/app_services/router/route_enum_description_extension.dart';
-import 'package:mobile/app_services/router/route_enum_drawer_extension.dart';
-import 'package:mobile/app_services/router/route_enum_path_extension.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum_description_extension.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum_drawer_extension.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum_path_extension.dart';
 import 'package:mobile/presentation/widgets/drawer/route_icon.dart';
 
 const double padding = 25.0;

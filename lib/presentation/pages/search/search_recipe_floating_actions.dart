@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/app_services/blocs/blocs.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum_path_extension.dart';
 import 'package:mobile/presentation/pages/search/picked_recipes/picked_recipes.dart';
 import 'package:mobile/business_logic/search_logic/search_bloc.dart';
 import 'package:mobile/business_logic/search_logic/search_event.dart';
@@ -11,6 +14,7 @@ const floatingActionsMargin = 15.0;
 const modeLabel = 'mode';
 const picksLabel = 'picks';
 const columnsLabel = 'columns';
+const startCookingLabel = 'cook';
 
 class SearchRecipesFloatingActions extends StatelessWidget {
   const SearchRecipesFloatingActions({super.key});
@@ -31,6 +35,11 @@ class SearchRecipesFloatingActions extends StatelessWidget {
             label: picksLabel,
             iconData: Icons.library_add_check,
             onPressed: _toggleShowPickedRecipes(context),
+          ),
+          ActionConfig(
+            label: startCookingLabel,
+            iconData: Icons.restaurant_outlined,
+            onPressed: _startCookingPickedRecipes(context),
           ),
         ],
       ),
@@ -55,5 +64,9 @@ class SearchRecipesFloatingActions extends StatelessWidget {
   void Function() _toggleDisplayMode() {
     final searchBloc = getIt.get<SearchBloc>();
     return () => searchBloc.add(ToggleDisplayModeEvent());
+  }
+
+  void Function() _startCookingPickedRecipes(BuildContext context) {
+    return () => context.go(RouteEnum.cook.path());
   }
 }

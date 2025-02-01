@@ -1,4 +1,4 @@
-import 'package:mobile/app_services/router/route_enum.dart';
+import 'package:mobile/app_services/router/route_enum/route_enum.dart';
 import 'package:mobile/app_services/router/routes.dart';
 
 // Note: Let's use switch-case to return the path for each route,
