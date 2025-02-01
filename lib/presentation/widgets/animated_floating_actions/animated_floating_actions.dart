@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:collection/collection.dart';
+import 'package:mobile/app_services/theme/colors.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/action_button.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/constant_values.dart';
@@ -13,7 +14,12 @@ import 'package:mobile/presentation/widgets/animated_floating_actions/master_but
 /// fade out and slide back down.
 class AnimatedFloatingActions extends StatefulWidget {
   final List<ActionConfig> actionConfigs;
-  const AnimatedFloatingActions({super.key, required this.actionConfigs});
+  final bool shouldHideAfterOnPressed;
+  const AnimatedFloatingActions({
+    super.key,
+    required this.actionConfigs,
+    this.shouldHideAfterOnPressed = false,
+  });
 
   @override
   State<AnimatedFloatingActions> createState() =>
@@ -53,33 +59,62 @@ class AnimatedFloatingActionsState extends State<AnimatedFloatingActions>
     shouldExpand ? _controller.forward() : _controller.reverse();
   }
 
-  Size _getStackContainerSize(int actionsCount, bool showLabels) {
+  Size _getStackContainerSize(bool showLabels) {
     final spacing =
         showLabels ? actionButtonSpacingWithLabel : actionButtonSpacing;
-    final height = masterButtonSize + (actionsCount * (iconSize + spacing));
+    final height =
+        masterButtonSize + (widget.actionConfigs.length * (iconSize + spacing));
     // Note: The extra pixels are added to the height and width to prevent
     // the content from being cut off
     return Size(masterButtonSize + 1, height + 5);
   }
 
+  double _getBackgroundContainerHeight(bool showLabels) {
+    const spacing = actionButtonSpacingWithLabel;
+    return masterButtonSize +
+        (_expansion.value *
+            (widget.actionConfigs.length * (iconSize + spacing)));
+  }
+
   @override
   Widget build(BuildContext context) {
-    // FIXME: Add to settings the possiblility to toggle this property
+    // FIXME: Add to settings the possiblility to toggle this property?
     const bool showLabels = true;
-    final size =
-        _getStackContainerSize(widget.actionConfigs.length, showLabels);
+    final size = _getStackContainerSize(showLabels);
 
     return SizedBox(
       width: size.width,
       height: size.height,
       child: Stack(
         children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: AnimatedBuilder(
+              animation: _expansion,
+              builder: (context, child) {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    height: _getBackgroundContainerHeight(showLabels),
+                    decoration: BoxDecoration(
+                      color: background.withOpacity(_expansion.value),
+                      borderRadius: BorderRadius.circular(50.0),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
           ...widget.actionConfigs.mapIndexed(
             (index, config) => ActionButton(
               config: config,
               expansion: _expansion,
               index: index,
               showLabel: showLabels,
+              hideAfterOnPressed:
+                  widget.shouldHideAfterOnPressed ? _toggleExpansion : null,
             ),
           ),
           MasterButton(

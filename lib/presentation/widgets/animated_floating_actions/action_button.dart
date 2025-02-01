@@ -12,6 +12,7 @@ class ActionButton extends StatelessWidget {
   final Animation<double> expansion;
   final int index;
   final bool showLabel;
+  final Function()? hideAfterOnPressed;
 
   const ActionButton({
     super.key,
@@ -19,6 +20,7 @@ class ActionButton extends StatelessWidget {
     required this.expansion,
     required this.index,
     required this.showLabel,
+    this.hideAfterOnPressed,
   });
 
   double _calculateTargetOffset() {
@@ -65,7 +67,10 @@ class ActionButton extends StatelessWidget {
                       size: iconSize,
                     ),
                     color: colors.secondary,
-                    onPressed: config.onPressed,
+                    onPressed: () {
+                      config.onPressed();
+                      if (hideAfterOnPressed != null) hideAfterOnPressed!();
+                    },
                   ),
                 ),
               ),

@@ -5,7 +5,7 @@ import 'package:mobile/business_logic/search_logic/search_bloc.dart';
 import 'package:mobile/business_logic/search_logic/search_event.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/action_config.dart';
 import 'package:mobile/presentation/widgets/animated_floating_actions/animated_floating_actions.dart';
-import 'package:mobile/presentation/widgets/modal_sheets/bottom_modal_sheet.dart';
+import 'package:mobile/presentation/widgets/modal_sheet_utils/bottom_modal_sheet.dart';
 
 const floatingActionsMargin = 15.0;
 const modeLabel = 'mode';

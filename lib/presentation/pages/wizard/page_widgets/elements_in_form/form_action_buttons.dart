@@ -28,7 +28,7 @@ class FormActionButtons extends StatelessWidget {
       final isEdit = state.originalRecipe != null;
       const buttonTextStyle = TextStyle(fontSize: buttonFontSize);
 
-      final canSubmit = state.status != BlocStatus.submitting;
+      final canSubmit = state.status != Status.submitting;
       final showReset = isEdit && canSubmit;
       final showClear = canSubmit;
 

@@ -3,7 +3,7 @@ import 'package:mobile/presentation/pages/search/recipe_display_mode_enum.dart';
 import 'package:mobile/business_logic/models/bloc_status/bloc_status.dart';
 
 class SearchState extends Equatable {
-  final BlocStatus status;
+  final Status status;
   final List<int> pickedRecipeIds;
   final RecipeDisplayMode displayMode;
 
@@ -14,7 +14,7 @@ class SearchState extends Equatable {
   });
 
   SearchState copyWith({
-    BlocStatus? newStatus,
+    Status? newStatus,
     List<int>? newPickedRecipeIds,
     RecipeDisplayMode? newDisplayMode,
   }) {

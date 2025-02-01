@@ -22,7 +22,7 @@ const cookPath = '/cook';
 const settingsPath = '/settings';
 const shoppingPath = '/shopping';
 const wizardPath = '/wizard';
-const accountPath = '/account';
+const accountPathRoot = '/account';
 
 @TypedGoRoute<HomeRoute>(path: HomeRoute.path, routes: [
   TypedGoRoute<HomeRoute>(path: HomeRoute.path),
@@ -96,7 +96,7 @@ class WizardRoute extends GoRouteData {
 
 @immutable
 class AccountRoute extends GoRouteData {
-  static const path = accountPath;
+  static const path = accountPathRoot;
   @override
   Widget build(BuildContext context, GoRouterState state) =>
       const AccountPage();

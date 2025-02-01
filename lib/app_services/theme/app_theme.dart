@@ -18,6 +18,11 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: dark,
         ),
+        headlineLarge: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.w700,
+          color: dark,
+        ),
         headlineMedium: TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.w600,
@@ -55,6 +60,8 @@ class AppTheme {
         tertiaryFixedDim: veryPale,
         onPrimary: medium,
         onSecondary: slightlyDark,
+        error: error,
+        onSecondaryFixed: danger,
       ),
     );
   }

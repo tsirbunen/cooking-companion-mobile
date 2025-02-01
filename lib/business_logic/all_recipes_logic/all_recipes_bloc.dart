@@ -2,10 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile/business_logic/all_recipes_logic/all_recipes_event.dart';
 import 'package:mobile/business_logic/all_recipes_logic/all_recipes_state.dart';
 import 'package:mobile/business_logic/models/bloc_status/bloc_status.dart';
-import 'package:mobile/repositories_and_data/repositories/recipe_repository.dart';
+import 'package:mobile/repositories/recipes/repositories/recipe_repository.dart';
 import 'package:mobile/business_logic/models/recipe/recipe.dart';
-import 'package:mobile/repositories_and_data/models/either/either.dart';
-import 'package:mobile/repositories_and_data/models/failure/failure.dart';
+import 'package:mobile/repositories/common/models/either/either.dart';
+import 'package:mobile/repositories/common/models/failure/failure.dart';
 
 class AllRecipesBloc extends Bloc<AllRecipesEvent, AllRecipesState> {
   final RecipeRepository _recipeRepository;
@@ -27,17 +27,17 @@ class AllRecipesBloc extends Bloc<AllRecipesEvent, AllRecipesState> {
     FetchAllRecipesEvent event,
     Emitter<AllRecipesState> emit,
   ) async {
-    emit(state.copyWith(newStatus: BlocStatus.loading));
+    emit(state.copyWith(newStatus: Status.loading));
 
     final Either<Failure, List<Recipe>> result =
         await _recipeRepository.getAllRecipes();
     result.match(
       (data) => emit(state.copyWith(
         newAllRecipes: data,
-        newStatus: BlocStatus.ok,
+        newStatus: Status.ok,
         newInitialLoadingDone: true,
       )),
-      (failure) => emit(state.copyWith(newStatus: BlocStatus.error)),
+      (failure) => emit(state.copyWith(newStatus: Status.error)),
     );
   }
 

@@ -11,7 +11,7 @@ const String onlyOneGroupSupportedMessage =
     'Currently only one ingredient group and one instruction group supported!';
 
 class WizardState extends Equatable {
-  final BlocStatus status;
+  final Status status;
   final int? id;
   final String? title;
   final bool? ovenNeeded;
@@ -24,7 +24,7 @@ class WizardState extends Equatable {
   // FIXME: Implement hasChanges field
 
   const WizardState({
-    this.status = BlocStatus.ok,
+    this.status = Status.ok,
     this.id,
     this.title,
     this.ovenNeeded,
@@ -44,7 +44,7 @@ class WizardState extends Equatable {
     }
 
     return WizardState(
-      status: BlocStatus.ok,
+      status: Status.ok,
       id: recipe.id,
       title: recipe.title,
       ovenNeeded: recipe.ovenNeeded,
@@ -69,7 +69,7 @@ class WizardState extends Equatable {
   }
 
   WizardState copyWith({
-    BlocStatus? newStatus,
+    Status? newStatus,
     int? newId,
     String? newTitle,
     bool? newOvenNeeded,

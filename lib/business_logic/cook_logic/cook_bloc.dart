@@ -4,7 +4,7 @@ import 'package:mobile/business_logic/cook_logic/cook_state.dart';
 import 'package:mobile/business_logic/models/side/side_enum.dart';
 import 'package:mobile/business_logic/cook_logic/utils.dart';
 import 'package:mobile/business_logic/models/recipe/recipe.dart';
-import 'package:mobile/repositories_and_data/repositories/recipe_repository.dart';
+import 'package:mobile/repositories/recipes/repositories/recipe_repository.dart';
 
 class CookBloc extends Bloc<CookEvent, CookState> {
   final RecipeRepository _recipeRepository;

@@ -3,14 +3,14 @@ import 'package:mobile/business_logic/models/recipe/recipe.dart';
 import 'package:mobile/presentation/pages/search/recipe_display_mode_enum.dart';
 import 'package:mobile/business_logic/search_logic/search_event.dart';
 import 'package:mobile/business_logic/search_logic/search_state.dart';
-import 'package:mobile/repositories_and_data/repositories/recipe_repository.dart';
+import 'package:mobile/repositories/recipes/repositories/recipe_repository.dart';
 import 'package:mobile/business_logic/models/bloc_status/bloc_status.dart';
 
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   final RecipeRepository _recipeRepository;
 
   SearchBloc(this._recipeRepository)
-      : super(const SearchState(status: BlocStatus.ok)) {
+      : super(const SearchState(status: Status.ok)) {
     on<SearchEvent>(_onEvent);
   }
 

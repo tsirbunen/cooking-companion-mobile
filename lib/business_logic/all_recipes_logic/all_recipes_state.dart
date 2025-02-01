@@ -3,18 +3,18 @@ import 'package:mobile/business_logic/models/recipe/recipe.dart';
 
 class AllRecipesState {
   final List<Recipe> recipes;
-  final BlocStatus status;
+  final Status status;
   final bool initialLoadingDone;
 
   const AllRecipesState({
     this.recipes = const [],
-    this.status = BlocStatus.ok,
+    this.status = Status.ok,
     this.initialLoadingDone = false,
   });
 
   AllRecipesState copyWith({
     List<Recipe>? newAllRecipes,
-    BlocStatus? newStatus,
+    Status? newStatus,
     bool? newInitialLoadingDone,
   }) {
     return AllRecipesState(

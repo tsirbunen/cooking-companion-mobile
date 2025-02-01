@@ -1,10 +1,18 @@
-enum BlocStatus {
+enum Status {
+  error,
+  dirty,
   loading,
   ok,
-  error,
   submitting,
+  success,
+  // FIXME: Get rid of these
   recipeCreated,
   recipePatched,
 }
 
-// FIXME: Implement possible message!!!
+class BlocStatus {
+  final Status status;
+  final String? message;
+
+  const BlocStatus(this.status, {this.message});
+}

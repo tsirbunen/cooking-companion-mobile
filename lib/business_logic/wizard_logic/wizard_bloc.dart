@@ -4,9 +4,9 @@ import 'package:mobile/business_logic/models/recipe/recipe.dart';
 import 'package:mobile/business_logic/wizard_logic/utils.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
-import 'package:mobile/repositories_and_data/repositories/recipe_repository.dart';
-import 'package:mobile/repositories_and_data/models/either/either.dart';
-import 'package:mobile/repositories_and_data/models/failure/failure.dart';
+import 'package:mobile/repositories/recipes/repositories/recipe_repository.dart';
+import 'package:mobile/repositories/common/models/either/either.dart';
+import 'package:mobile/repositories/common/models/failure/failure.dart';
 
 const String someDataIsMissing = 'Some data is missing!';
 
@@ -70,7 +70,7 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
   ) async {
     final isCreate = state.id == null;
 
-    emit(state.copyWith(newStatus: BlocStatus.submitting));
+    emit(state.copyWith(newStatus: Status.submitting));
 
     final Either<Failure, Recipe> result = isCreate
         ? await _handleSubmitCreateRecipe()
@@ -79,15 +79,14 @@ class WizardBloc extends Bloc<WizardEvent, WizardState> {
     result.match(
       (data) => emit(
         state.copyWith(
-          newStatus:
-              isCreate ? BlocStatus.recipeCreated : BlocStatus.recipePatched,
+          newStatus: isCreate ? Status.recipeCreated : Status.recipePatched,
           newId: data!.id,
         ),
       ),
       (failure) => emit(
         // FIXME: Handle showing error message to user
         state.copyWith(
-          newStatus: BlocStatus.ok,
+          newStatus: Status.ok,
         ),
       ),
     );

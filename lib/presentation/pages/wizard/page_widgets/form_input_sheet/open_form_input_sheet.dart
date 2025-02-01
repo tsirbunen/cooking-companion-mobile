@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/presentation/pages/wizard/page_widgets/form_input_sheet/form_input_sheet_buttons.dart';
 import 'package:mobile/presentation/pages/wizard/page_widgets/form_widgets/sub_title_in_form.dart';
-import 'package:mobile/presentation/widgets/modal_sheets/show_top_modal_sheet.dart';
+import 'package:mobile/presentation/widgets/modal_sheet_utils/open_top_modal_sheet.dart';
 
 const double sheetMargin = 20.0;
 const double topPadding = 20.0;
-const double borderRadius = 20.0;
 const double sheetMinHeight = 300.0;
 
 // Note: Use named required parameters especially to avoid possible mix-ups
@@ -22,7 +21,7 @@ Future<String?> openFormInputSheet({
   final width = screenSize.width;
   final ThemeData themeData = Theme.of(context);
 
-  return await showTopModalSheet(
+  return await openTopModalSheet(
     context,
     Container(
       width: width,
@@ -49,13 +48,6 @@ Future<String?> openFormInputSheet({
         ),
       ),
     ),
-    // Note: Prevent user from dismissing the sheet by tapping outside
-    // of it so that we can easily clear the text editing controller
-    // on closing the sheet.
-    barrierDismissible: false,
     backgroundColor: themeData.colorScheme.surface,
-    borderRadius: const BorderRadius.vertical(
-      bottom: Radius.circular(borderRadius),
-    ),
   );
 }

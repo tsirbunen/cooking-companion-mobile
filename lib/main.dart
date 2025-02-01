@@ -4,8 +4,6 @@ import 'package:mobile/app_services/blocs/blocs.dart';
 import 'package:mobile/app_services/theme/app_status_bar_color.dart';
 import 'package:mobile/presentation/widgets/launch/launch_widget.dart';
 
-// NOTE: While transitioning away from Riverpod to Flutter Bloc, these two
-// "worlds" live simultaneously in the app.
 void main() async {
   setAppStatusBarColor();
 
@@ -14,6 +12,9 @@ void main() async {
   runApp(const LaunchWidget());
 
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Note: We use the getIt service locator to help us manage our dependencies and
+  // to make bloc-to-bloc communication easier.
   prepareBlocs();
 
   return runApp(

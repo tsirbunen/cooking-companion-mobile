@@ -4,11 +4,11 @@ import 'package:mobile/business_logic/models/recipe/recipe.dart';
 import 'package:mobile/business_logic/models/tag/tag.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_event.dart';
 import 'package:mobile/business_logic/wizard_logic/wizard_state.dart';
-import 'package:mobile/repositories_and_data/models/create_recipe_input/create_recipe_input.dart';
-import 'package:mobile/repositories_and_data/models/ingredient_group_input/ingredient_group_input.dart';
-import 'package:mobile/repositories_and_data/models/ingredient_input/ingredient_input.dart';
-import 'package:mobile/repositories_and_data/models/instruction_group_input/instruction_group_input.dart';
-import 'package:mobile/repositories_and_data/models/patch_recipe_input/patch_recipe_input.dart';
+import 'package:mobile/repositories/recipes/models/create_recipe_input/create_recipe_input.dart';
+import 'package:mobile/repositories/recipes/models/ingredient_group_input/ingredient_group_input.dart';
+import 'package:mobile/repositories/recipes/models/ingredient_input/ingredient_input.dart';
+import 'package:mobile/repositories/recipes/models/instruction_group_input/instruction_group_input.dart';
+import 'package:mobile/repositories/recipes/models/patch_recipe_input/patch_recipe_input.dart';
 
 bool shouldNeglectEvent<T>(WizardListEvent event, List<T> list) {
   return event.index < 0 || event.index > list.length;

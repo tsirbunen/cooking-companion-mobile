@@ -11,3 +11,4 @@ const Color dark = Color.fromARGB(255, 71, 71, 71);
 const Color veryDark = Color.fromARGB(255, 40, 41, 40);
 const Color success = Color.fromARGB(255, 101, 183, 65);
 const Color error = Color.fromARGB(255, 227, 100, 20);
+const Color danger = Color.fromARGB(255, 195, 11, 17);

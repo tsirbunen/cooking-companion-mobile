@@ -23,7 +23,7 @@ or, for a more verbose output
 
 `flutter test -r expanded`
 
-Note that error logs are expected in the test output logs (as also api server error handling is tested)! In the tests as little as possible has been mocked (meaning that currently only the graphQL client that is used by the api service has been replaced with mock implementations in the tests).
+**Note that error logs are expected in the test output logs** (as also api server error handling is tested)! In the tests as little as possible has been mocked (meaning that currently only the graphQL client that is used by the api service has been replaced with mock implementations in the tests).
 
 ### Packages and technologies
 
@@ -85,3 +85,9 @@ cook_logic/
       ├── cook_state.dart
       └── utils.dart
 ```
+
+### Coding conventions
+
+Here are some conventions used when developing the app:
+
+- To understand what a widget does, I often need to see the build method. If the build method is placed at the end of the file (as seems to be the default), then I need to scroll to the end of the file to find it. However, if the build method is placed at the top of the Widget file instead, then there is no need to scroll. Furthermore, if the widget returned by the build method is composed of other, smaller widgets with descriptive names, then there might be no need to look further. Therefore, in this codebase, **each widget is placed in a file of its own own, the build method of each widget is placed at the top of the file containing it, and the build method uses other, smaller widgets with descriptive names**. All other methods are placed after the build method and the styling is placed at the very end where possible.

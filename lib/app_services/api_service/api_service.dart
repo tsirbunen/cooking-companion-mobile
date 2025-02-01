@@ -3,8 +3,8 @@ import 'package:graphql/client.dart';
 import 'package:mobile/app_services/api_service/graphql_query_interceptor.dart';
 import 'package:mobile/app_services/logger/logger.dart';
 import 'dart:async';
-import 'package:mobile/repositories_and_data/models/either/either.dart';
-import 'package:mobile/repositories_and_data/models/failure/failure.dart';
+import 'package:mobile/repositories/common/models/either/either.dart';
+import 'package:mobile/repositories/common/models/failure/failure.dart';
 
 const httpHeaders = {'Content-Type': 'application/json', 'charset': 'UTF-8'};
 const apiUrl = 'https://cookbook-dusky.vercel.app/api/graphql';
@@ -46,9 +46,11 @@ class ApiService {
   // FIXME: Figure out why query interceptor logs only the first time a query
   // is made but logs every time a mutation is made.
   Future<Either<Failure, Map<String, dynamic>>> performQuery(
-      String query) async {
+      String query, Map<String, dynamic>? variables) async {
     try {
-      final QueryOptions options = QueryOptions(document: gql(query));
+      final QueryOptions options = variables == null
+          ? QueryOptions(document: gql(query))
+          : QueryOptions(document: gql(query), variables: variables);
       final QueryResult response = await _graphQLClient.query(options);
 
       if (response.hasException || response.data == null) {

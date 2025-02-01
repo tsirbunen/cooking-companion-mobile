@@ -34,9 +34,9 @@ class _SearchPageState extends State<SearchPage> {
       ) {
         final blocStatus = state.status;
         Widget content;
-        if (blocStatus == BlocStatus.loading) {
+        if (blocStatus == Status.loading) {
           content = const Center(child: ProgressIndicatorXL());
-        } else if (blocStatus == BlocStatus.error) {
+        } else if (blocStatus == Status.error) {
           content = const Center(child: Text('Error'));
         } else {
           content = const RecipesDisplay();

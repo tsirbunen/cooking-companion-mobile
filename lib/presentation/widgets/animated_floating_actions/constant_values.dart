@@ -8,5 +8,5 @@ const double elevation = 10.0;
 const double zeroPosition = 0.0;
 const int durationMilliseconds = 500;
 const double initialAnimationValue = 0.0;
-const double masterButtonBorderRadius = 15.0;
+const double masterButtonBorderRadius = 100.0;
 const double labelPaddingTop = 3.0;

@@ -9,7 +9,7 @@ import 'package:mobile/presentation/widgets/drawer/route_icon.dart';
 const double padding = 25.0;
 const double labelLineHeight = 1.75;
 const double borderRadius = 10;
-const double containerPadding = padding / 1.5;
+const double containerPadding = padding / 2.0;
 
 class RouteDescriptionWithNavigation extends StatelessWidget {
   final RouteEnum route;
