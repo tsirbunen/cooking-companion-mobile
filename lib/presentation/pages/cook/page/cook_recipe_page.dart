@@ -32,6 +32,7 @@ class _CookRecipePageState extends State<CookRecipePage> {
     super.initState();
     final double position = _getPreviousScrollPosition();
     _scrollController = ScrollController(initialScrollOffset: position);
+    _lastScrollPosition = position;
     _scrollController.addListener(setScrollPositionLocally);
 
     Future.delayed(const Duration(milliseconds: 1650), () {
